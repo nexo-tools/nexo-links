@@ -17,18 +17,18 @@
 </div>
 
 <div class="flex flex-wrap gap-x-6 gap-y-2">
-    <label class="flex items-center gap-2 text-sm text-gray-700">
+    <label class="flex items-center gap-2 text-sm text-ink">
         <input type="hidden" name="is_highlighted" value="0">
         <input type="checkbox" name="is_highlighted" value="1"
-               class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+               class="rounded border-line text-indigo-600 shadow-sm focus:ring-indigo-500"
                @checked((bool) old('is_highlighted', $editing?->is_highlighted))>
         {{ __('Highlight this link') }}
     </label>
 
-    <label class="flex items-center gap-2 text-sm text-gray-700">
+    <label class="flex items-center gap-2 text-sm text-ink">
         <input type="hidden" name="show_countdown" value="0">
         <input type="checkbox" name="show_countdown" value="1"
-               class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+               class="rounded border-line text-indigo-600 shadow-sm focus:ring-indigo-500"
                @checked((bool) old('show_countdown', $editing?->show_countdown))>
         {{ __('Show countdown before it starts') }}
     </label>
