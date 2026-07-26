@@ -85,6 +85,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Cookieless Ecosystem Beacon (opt-in)
+    |--------------------------------------------------------------------------
+    |
+    | Off by default so a standalone install phones nobody home. When enabled,
+    | resources/js/nexo-beacon.js sendBeacon()s an anonymous pageview to the
+    | Nexo Tools hub (see partials/beacon.blade.php — metas render only when on).
+    |
+    */
+
+    'beacon' => [
+        'enabled' => (bool) env('NEXO_BEACON_ENABLED', false),
+        'endpoint' => (string) env('NEXO_BEACON_ENDPOINT', 'https://nexotools.alvarocdev.com/beacon'),
+        'origin' => (string) env('NEXO_BEACON_ORIGIN', 'nexolinks'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Social Platforms
     |--------------------------------------------------------------------------
     |

@@ -5,7 +5,7 @@
 # KEEP IN SYNC with app/Http/Middleware/SecurityHeaders.php.
 <IfModule mod_headers.c>
     Header always unset Content-Security-Policy
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-eval' 'sha256-QY4re+NFw+ChK0c8H/EaTpktoUisSWU0fL7V6J43umM=' 'sha256-2qwONLNmvHJqxi/leywqDx1vrIZL78PIpOKJlXHdkRM='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-eval' 'sha256-QY4re+NFw+ChK0c8H/EaTpktoUisSWU0fL7V6J43umM=' 'sha256-2qwONLNmvHJqxi/leywqDx1vrIZL78PIpOKJlXHdkRM='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://nexotools.alvarocdev.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
 </IfModule>
 
 <IfModule mod_rewrite.c>

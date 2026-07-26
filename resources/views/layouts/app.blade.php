@@ -9,6 +9,8 @@
 
         @include('partials.brand-head')
 
+        @include('partials.beacon')
+
         @vite(["resources/css/app.css", "resources/js/app.js"])
     </head>
     <body class="flex min-h-screen flex-col bg-bg font-sans text-ink antialiased">

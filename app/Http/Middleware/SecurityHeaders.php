@@ -35,6 +35,11 @@ class SecurityHeaders
                 "style-src 'self' 'unsafe-inline'",
                 "img-src 'self' data: blob:",
                 "font-src 'self'",
+                // The one permitted external host: the Nexo Tools hub, so the
+                // opt-in cookieless pageview beacon (navigator.sendBeacon) is not
+                // blocked (there is no other connect-src, so it would fall back to
+                // default-src 'self'). It only fires when the beacon metas render.
+                "connect-src 'self' https://nexotools.alvarocdev.com",
                 "object-src 'none'",
                 "base-uri 'self'",
                 "form-action 'self'",
