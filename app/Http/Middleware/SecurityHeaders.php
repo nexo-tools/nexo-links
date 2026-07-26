@@ -25,8 +25,13 @@ class SecurityHeaders
         if (! file_exists(public_path('hot'))) {
             $response->headers->set('Content-Security-Policy', implode('; ', [
                 "default-src 'self'",
-                // Alpine evaluates inline expressions; the countdown script is inline
-                "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+                // Alpine evaluates directive expressions at runtime, which needs
+                // 'unsafe-eval' — but no 'unsafe-inline': the two inline <script>s are
+                // allow-listed by their exact sha256 hash. First = the FOUC-free
+                // theme-init (partials/theme-init); second = the countdown on public
+                // pages (pages/show). Recompute a hash if you edit either snippet and
+                // mirror the whole policy in public/.htaccess (a test keeps them in sync).
+                "script-src 'self' 'unsafe-eval' 'sha256-QY4re+NFw+ChK0c8H/EaTpktoUisSWU0fL7V6J43umM=' 'sha256-2qwONLNmvHJqxi/leywqDx1vrIZL78PIpOKJlXHdkRM='",
                 "style-src 'self' 'unsafe-inline'",
                 "img-src 'self' data: blob:",
                 "font-src 'self'",

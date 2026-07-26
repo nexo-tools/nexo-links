@@ -134,7 +134,7 @@
 
                                     <button type="button" @click="editing = ! editing" x-bind:aria-expanded="editing" class="text-sm text-gray-600 hover:text-gray-900 underline">{{ __('Edit') }}</button>
 
-                                    <form method="POST" action="{{ route('links.destroy', $link) }}" onsubmit="return confirm('{{ __('Delete this link?') }}')">
+                                    <form method="POST" action="{{ route('links.destroy', $link) }}" @submit="confirm('{{ __('Delete this link?') }}') || $event.preventDefault()">
                                         @csrf
                                         @method('DELETE')
                                         <button class="text-sm text-red-600 hover:text-red-900 underline">{{ __('Delete') }}</button>

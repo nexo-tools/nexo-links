@@ -3,6 +3,11 @@
      parent domain by the toggle in js/nexo-ui.js, so "dark in one tool = dark in
      all"), else the OS preference.
 
-     nexolinks ships script-src with 'unsafe-inline', so this inline snippet needs
-     no CSP hash. Kept a single line to match the rest of the ecosystem. --}}
+     STRICT CSP: this is an inline <script>. It is allow-listed by its exact
+     sha256 hash in the CSP (App\Http\Middleware\SecurityHeaders + public/.htaccess,
+     kept in sync) — no 'unsafe-inline' for scripts. Recompute the hash if you edit
+     the snippet below. Current hash:
+       sha256-QY4re+NFw+ChK0c8H/EaTpktoUisSWU0fL7V6J43umM=
+     The snippet stays a single line so the hashed bytes are exactly the script
+     body, with no surrounding whitespace. --}}
 <script>(function(){try{var m=document.cookie.match(/(?:^|; )nexo-theme=([^;]+)/);var mode=(m&&m[1])||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',mode);}catch(e){}})();</script>

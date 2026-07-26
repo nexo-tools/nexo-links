@@ -155,6 +155,11 @@
     </main>
 
     @if ($links->contains(fn ($link) => $link->isUpcoming()))
+        {{-- STRICT CSP: this inline countdown is allow-listed by its exact sha256
+             hash (App\Http\Middleware\SecurityHeaders + public/.htaccess, kept in
+             sync) — no 'unsafe-inline'. Recompute the hash if you edit the script
+             body below (whitespace included). Current hash:
+             sha256-2qwONLNmvHJqxi/leywqDx1vrIZL78PIpOKJlXHdkRM= --}}
         <script>
             document.querySelectorAll('[data-countdown]').forEach((el) => {
                 const target = Number(el.dataset.countdown) * 1000;
