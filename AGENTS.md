@@ -25,20 +25,23 @@ multilingual (en/es/pt). **In production** at https://nexolinks.alvarocdev.com
 ## How to run it
 
 There is no local PHP/Composer — everything runs through Docker/Sail
-(see README for first-time setup). Verified daily commands:
+(see README for first-time setup). Since 2026-07-26 the stateful services
+(MySQL, Mailpit, phpMyAdmin) come from the shared dev environment
+(`~/dev-environment`, compose project `nexo`): MySQL on host port **3307**
+(db `nexo`, user/pass `dev`/`dev`), Mailpit SMTP 1025 / UI 8025, phpMyAdmin
+8306. This repo's `compose.yaml` ships only the app runtime and reaches them
+via `host.docker.internal`; `APP_PORT=8090` / `VITE_PORT=5174` /
+`WWWUSER`/`WWWGROUP` are pinned in `.env`. Verified daily commands:
 
 ```bash
-./vendor/bin/sail up -d                 # start (MySQL + Mailpit)
+cd ~/dev-environment && docker compose up -d mysql mailpit  # shared services first
+./vendor/bin/sail up -d                 # app at http://localhost:8090
 ./vendor/bin/sail artisan migrate --seed  # demo login: demo@nexo.test / password
 ./vendor/bin/sail npm run build         # or `npm run build` on the host
-./vendor/bin/sail artisan test          # Pest suite
+./vendor/bin/sail artisan test          # Pest suite (SQLite, no MySQL needed)
 ./vendor/bin/sail composer lint:check   # Pint (lint = auto-fix)
 ./vendor/bin/sail composer analyse      # Larastan
 ```
-
-If default ports are taken by other local projects, this repo's `.env` may
-override them (`APP_PORT`, `FORWARD_DB_PORT`, `VITE_PORT`, Mailpit ports) —
-the app is then at `http://localhost:<APP_PORT>`.
 
 ## Project conventions
 
