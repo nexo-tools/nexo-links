@@ -48,7 +48,7 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">{{ __('Profile') }}</x-dropdown-link>
                         <x-dropdown-link :href="route('help')">{{ __('nexo.help.title') }}</x-dropdown-link>
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ config('nexo-sso.enabled') ? route('nexo-sso.logout') : route('logout') }}">
                             @csrf
                             <x-dropdown-link :href="route('logout')"
                                 @click.prevent="$el.closest('form').submit()">
