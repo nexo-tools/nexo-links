@@ -220,6 +220,9 @@ return [
         'nexo',
         'official',
         'password',
+        // Both spellings: the legal routes are the Spanish ones, the English
+        // pair stays reserved so nobody can impersonate them either.
+        'privacidad',
         'privacy',
         'profile',
         'register',
@@ -232,6 +235,7 @@ return [
         'storage',
         'support',
         'system',
+        'terminos',
         'terms',
         'up',
         'verify',

@@ -10,6 +10,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    {{-- Deliberate exception to the "one <x-nexo-seo> per head" rule: this head
+         is per-page, not per-tool. Title, description and og:image come from the
+         owner's profile (their avatar is the OG card), og:type is `profile`
+         rather than `website`, and there is no hreflang set because a storefront
+         has no translated twin — it renders whatever the owner wrote, in one
+         language. The shared component would flatten all of that. --}}
     <title>{{ '@'.$page->username }} · {{ config('app.name') }}</title>
     <meta name="description" content="{{ $page->bio ?? '@'.$page->username.' links' }}">
     <link rel="canonical" href="{{ route('page.show', $page->username) }}">
@@ -147,6 +153,13 @@
             </a>
             <span aria-hidden="true">·</span>
             <x-language-switcher class="gap-1.5" />
+            <span aria-hidden="true">·</span>
+            {{-- Privacy only (not the whole legal pair): this page is where the
+                 cookieless click measurement happens, so its visitors are the
+                 people the policy is about. The owner-facing chrome carries both. --}}
+            <a href="{{ route('legal.privacy') }}" class="transition hover:opacity-70">
+                {{ __('Privacy') }}
+            </a>
             <span aria-hidden="true">·</span>
             <a href="{{ route('report.create', $page->username) }}" rel="nofollow" class="transition hover:opacity-70">
                 {{ __('Report') }}

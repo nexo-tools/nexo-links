@@ -54,6 +54,12 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v3
 
+      # Fails if a __() string has no es/pt translation, or if a lang file was
+      # hand-edited / the generator was never re-run. Needs vendor/ (laravel-lang
+      # is the source of the framework strings), hence the position.
+      - name: Translations (check in sync)
+        run: node scripts/generate-translations.mjs --check
+
       - name: Build frontend assets
         run: |
           npm ci

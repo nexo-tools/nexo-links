@@ -4,9 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ __('nexo.help.title') }} · {{ config('app.name') }}</title>
-    <meta name="description" content="{{ __('What can I do in :app?', ['app' => config('app.name')]) }}">
-    <link rel="canonical" href="{{ route('help') }}">
+    {{-- The standard SEO block, not a hand-rolled head: /help is trilingual, so
+         it needs the es/en/pt hreflang set the component emits. --}}
+    <x-nexo-seo
+        :title="__('nexo.help.title').' · '.config('app.name')"
+        :description="__('What can I do in :app?', ['app' => config('app.name')])"
+        :canonical="route('help')" />
 
     @include('partials.brand-head')
 

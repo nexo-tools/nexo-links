@@ -51,6 +51,10 @@ cd ~/dev-environment && docker compose up -d mysql mailpit  # shared services fi
   (en → es + pt, canonical code `pt` sourced from laravel-lang `pt_BR`) to
   `scripts/generate-translations.mjs`, then run it.
   Custom rule messages need `$fail(...)->translate()`.
+  `node scripts/generate-translations.mjs --check` verifies without writing
+  (missing translations + lang files that no longer match the generator);
+  `TranslationsSyncTest` and the CI i18n step both run it, so forgetting to
+  re-generate is a red build, not a silently English UI.
 - **Generated assets are scripted, never hand-edited**: brand/favicons/OG via
   `scripts/generate-brand-assets.mjs` (source: `resources/brand/mark.svg`),
   platform icons via `scripts/generate-social-icons.mjs`.
@@ -84,6 +88,40 @@ cd ~/dev-environment && docker compose up -d mysql mailpit  # shared services fi
 
 ## Accumulated context
 
+- **2026-07-28** — **Nexo standard: static pages, guardians, i18n drift check.**
+  (a) **Error pages**: `resources/views/components/error-layout.blade.php` +
+  `errors/{403,404,419,429,500,503}.blade.php`, copied from the standards repo
+  (`~/alvaro/templates/nexo-ui/pages/`) and adapted — this repo has no
+  `partials/head`, so the layout inlines its own head (brand-head + `<x-nexo-seo>`
+  with `noindex` and no hreflang). Classes verified against **Tailwind 3** (the
+  sibling tools are on TW4). (b) **Legal pages**: `/privacidad` + `/terminos`
+  (route names `legal.privacy` / `legal.terms`), `LegalController` + `legal/show`,
+  content in `lang/{es,en,pt}/legal.php` — Spanish is the source, en/pt are
+  translations. Content describes what the code really does (VisitorHash's
+  daily-rotating SHA-256, the sessions table storing IP+UA only while signed in,
+  public avatar/banner files, the URL-scheme whitelist, reserved usernames); both
+  segments added to `reserved_usernames` and linked from `nexo-footer`, the
+  sitemap and the public page footer (privacy only there). (c) **Guardians**:
+  `BrandAssetsPresentTest`, `DarkModeCoverageTest`, `StaticPagesTest` in
+  `tests/Feature/Nexo/`. DarkMode scans the whole view tree with **one carve-out,
+  `pages/show.blade.php`** — the storefront is themed by its owner and picks its
+  ink from the owner's background brightness, not from `data-theme`; a companion
+  test asserts that logic still exists so the exception cannot rot into a bug.
+  Fixing it rather than weakening it: the leftover Breeze surfaces
+  (`secondary-button`, `modal`, `responsive-nav-link`, the SSO button in
+  `auth/login`, `profile/edit`) moved onto the token layer. (d) **i18n**:
+  `--check` added to `scripts/generate-translations.mjs` (extracts `__()` /
+  `trans_choice()` / `$fail()` literals from `app/` + `resources/views`, skipping
+  lang-file and interpolated keys; fails on untranslated strings AND on lang files
+  that differ from the generator's output), plus `TranslationsSyncTest` and a CI
+  step. It immediately caught a pre-existing gap: `Avatar`, `Banner`, `Color`,
+  `URL`, `Are you sure you want to delete your account?` and the account-deletion
+  paragraph were never translated. (e) **SEO**: `/help` migrated from a hand-rolled
+  head to `<x-nexo-seo>` (it was trilingual with no hreflang); the storefront keeps
+  its own head **on purpose** — per-page title/description, the owner's avatar as
+  `og:image`, `og:type=profile`, and no hreflang because there is no translated
+  twin. 250 tests green (1 skipped: the sync test needs node, which the composer
+  runner image lacks — CI runs the generator step directly).
 - **2026-07-23** — **Nexo ID SSO client integrated** (ecosystem FASE 1; copied from the
   standards-repo template `~/alvaro/templates/nexo-sso-client`). Optional and **off by
   default** (`NEXO_SSO_ENABLED=false`) — standalone local auth is untouched and still the

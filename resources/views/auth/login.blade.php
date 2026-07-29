@@ -56,7 +56,7 @@
             <x-input-error :messages="$errors->get('nexo_sso')" class="mt-4" />
 
             <a href="{{ route('nexo-sso.redirect') }}"
-               class="mt-4 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+               class="mt-4 inline-flex w-full items-center justify-center rounded-md border border-line bg-surface px-4 py-2 text-sm font-medium text-ink shadow-sm hover:bg-surface-sunken focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-500">
                 {{ __('Continue with Nexo ID') }}
             </a>
         </div>

@@ -4,6 +4,7 @@ use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\ClickRedirectController;
 use App\Http\Controllers\DesignController;
 use App\Http\Controllers\HelpController;
+use App\Http\Controllers\LegalController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\OwnerReportController;
 use App\Http\Controllers\ProfileController;
@@ -26,6 +27,12 @@ Route::get('/', function () {
 // Help center. Registered before the /{username} catch-all so it is never
 // shadowed. The FAQ content is translatable (lang/*/help.php).
 Route::get('/help', HelpController::class)->name('help');
+
+// Legal pages. Spanish paths because the ecosystem is Spanish-first (the route
+// NAMES stay legal.privacy / legal.terms), registered before the /{username}
+// catch-all; both segments are reserved usernames so nobody can shadow them.
+Route::get('/privacidad', [LegalController::class, 'privacy'])->name('legal.privacy');
+Route::get('/terminos', [LegalController::class, 'terms'])->name('legal.terms');
 
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 

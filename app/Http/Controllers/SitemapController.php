@@ -13,6 +13,8 @@ class SitemapController extends Controller
             $urls = collect([
                 ['loc' => url('/'), 'lastmod' => null],
                 ['loc' => route('help'), 'lastmod' => null],
+                ['loc' => route('legal.privacy'), 'lastmod' => null],
+                ['loc' => route('legal.terms'), 'lastmod' => null],
             ])->concat(
                 Page::query()
                     ->latest('updated_at')

@@ -2,7 +2,17 @@
 // Nexo's own translations below. Portuguese uses the canonical ecosystem code
 // `pt`, but its content is sourced from laravel-lang's Brazilian `pt_BR` locale.
 // Run after adding new __() strings: node scripts/generate-translations.mjs
-import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+//
+// Usage: node scripts/generate-translations.mjs [--check]
+//   --check  writes nothing and exits non-zero if es/pt are out of sync: either a
+//            source string has no translation, or a lang file on disk differs
+//            from what this script produces (someone hand-edited it, or forgot
+//            to re-run). Used by TranslationsSyncTest and by the CI i18n step.
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+const CHECK = process.argv.includes('--check');
+const SOURCE_ROOTS = ['app', 'resources/views'];
 
 const AUTH_KEYS = ['failed', 'password', 'throttle'];
 const PASSWORD_KEYS = ['reset', 'sent', 'throttled', 'token', 'user'];
@@ -24,15 +34,20 @@ const nexo = {
         ':count click|:count clicks': ':count clic|:count clics',
         ':days days': ':days días',
         'Accent palette': 'Paleta de acento',
+        'Access denied': 'Acceso denegado',
         'Add': 'Agregar',
         'Add link': 'Agregar link',
         "An open-source link-in-bio page you host yourself — with visitor analytics that don't spy on anyone.":
             'Una página link-in-bio de código abierto que alojas tú mismo — con estadísticas de visitas que no espían a nadie.',
         'Analytics': 'Estadísticas',
         'Analytics without spying': 'Estadísticas sin espiar',
+        'Are you sure you want to delete your account?': '¿Seguro que quieres borrar tu cuenta?',
+        'Avatar': 'Avatar',
         'Avatar, banner, color palettes, solid or gradient backgrounds — with automatic dark mode and readable text guaranteed.':
             'Avatar, banner, paletas de colores, fondos sólidos o degradados — con modo oscuro automático y texto legible garantizado.',
+        'Back to home': 'Volver al inicio',
         'Background': 'Fondo',
+        'Banner': 'Portada',
         'Bio': 'Bio',
         'Build a WhatsApp link': 'Armar un link de WhatsApp',
         'Click stats with zero cookies and zero personal data stored. No consent banner needed — private by design.':
@@ -40,6 +55,7 @@ const nexo = {
         'Clicks': 'Clics',
         'Clicks per day': 'Clics por día',
         'Clicks per day, last :days days': 'Clics por día, últimos :days días',
+        'Color': 'Color',
         'Copied!': '¡Copiado!',
         'Copy URL': 'Copiar URL',
         'Create your page': 'Crea tu página',
@@ -58,6 +74,8 @@ const nexo = {
         'Expired': 'Vencido',
         'Fast and lightweight': 'Rápido y liviano',
         'Features': 'Características',
+        'For security reasons, reload the page and try again.':
+            'Por seguridad, recarga la página e inténtalo de nuevo.',
         'Gradient': 'Degradado',
         'Hidden': 'Oculto',
         'Hide': 'Ocultar',
@@ -79,14 +97,18 @@ const nexo = {
         'No links yet. Add your first one!': 'Aún no hay links. ¡Agrega el primero!',
         'No vendor lock-in': 'Sin ataduras a plataformas',
         'Nothing here yet.': 'Todavía no hay nada aquí.',
+        'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.':
+            'Cuando borres tu cuenta, todos sus recursos y datos se eliminarán de forma permanente. Escribe tu contraseña para confirmar que quieres borrar la cuenta definitivamente.',
         'Open source': 'Código abierto',
         'Open source on GitHub': 'Código abierto en GitHub',
         "Open-source link-in-bio page you host yourself, with visitor analytics that don't spy on anyone.":
             'Página link-in-bio de código abierto que alojas tú mismo, con estadísticas de visitas que no espían a nadie.',
+        'Page not found': 'Página no encontrada',
         'Per link': 'Por link',
         'Prefilled message (optional)': 'Mensaje precargado (opcional)',
         'Print it, add it to a business card or a story — it always points to your page.':
             'Imprímelo, ponlo en una tarjeta o en una historia — siempre apunta a tu página.',
+        'Privacy': 'Privacidad',
         'QR code that opens your page': 'Código QR que abre tu página',
         'Remove :platform': 'Quitar :platform',
         'Remove avatar': 'Quitar avatar',
@@ -108,19 +130,27 @@ const nexo = {
         'Social icons': 'Iconos sociales',
         'Social profiles': 'Perfiles sociales',
         'Solid color': 'Color sólido',
+        'Something went wrong': 'Algo salió mal',
         'Starts at (optional)': 'Empieza el (opcional)',
+        'Terms': 'Términos',
         'The :attribute ":input" is reserved.': 'El :attribute ":input" está reservado.',
         'The :attribute may only contain lowercase letters, numbers, hyphens and underscores.':
             'El campo :attribute solo puede contener minúsculas, números, guiones y guiones bajos.',
         'The :attribute must be a valid URL.': 'El campo :attribute debe ser una URL válida.',
         'The :attribute must start with http://, https://, mailto: or tel:.':
             'El campo :attribute debe empezar con http://, https://, mailto: o tel:.',
+        'The page expired': 'La página expiró',
+        'The problem is on our side. Try again in a few minutes.':
+            'El problema es nuestro. Inténtalo de nuevo en unos minutos.',
         'This will be your public page URL. Lowercase letters, numbers, hyphens and underscores.':
             'Esta será la URL pública de tu página. Minúsculas, números, guiones y guiones bajos.',
         'Title': 'Título',
         'To': 'Hasta',
+        'Too many requests': 'Demasiadas solicitudes',
         'Top referrers': 'Principales referentes',
         'Total clicks': 'Clics totales',
+        'URL': 'URL',
+        'Under maintenance': 'En mantenimiento',
         'Unique': 'Únicos',
         'Unique visitors': 'Visitantes únicos',
         'Use the international format, e.g. +5491122334455.': 'Usa el formato internacional, p. ej. +5491122334455.',
@@ -129,7 +159,14 @@ const nexo = {
         'Used for your avatar ring and highlighted links.': 'Se usa en el anillo de tu avatar y en los links destacados.',
         'Username': 'Nombre de usuario',
         'View my page': 'Ver mi página',
+        'We are making improvements. We will be back in a few minutes.':
+            'Estamos haciendo mejoras. Volvemos en unos minutos.',
+        'We could not find what you were looking for. The link may have changed or the page may no longer exist.':
+            'No encontramos lo que buscabas. Puede que el link haya cambiado o que la página ya no exista.',
         'You already added this platform.': 'Ya agregaste esta plataforma.',
+        'You do not have permission to see this page.': 'No tienes permiso para ver esta página.',
+        'You went a little too fast. Wait a moment and try again.':
+            'Fuiste un poco demasiado rápido. Espera un momento e inténtalo de nuevo.',
         'Your data.': 'Tus datos.',
         'Your domain.': 'Tu dominio.',
         'Your handle, email or URL': 'Tu usuario, email o URL',
@@ -231,15 +268,20 @@ const nexo = {
         ':count click|:count clicks': ':count clique|:count cliques',
         ':days days': ':days dias',
         'Accent palette': 'Paleta de destaque',
+        'Access denied': 'Acesso negado',
         'Add': 'Adicionar',
         'Add link': 'Adicionar link',
         "An open-source link-in-bio page you host yourself — with visitor analytics that don't spy on anyone.":
             'Uma página link-in-bio de código aberto que você mesmo hospeda — com estatísticas de visitantes que não espionam ninguém.',
         'Analytics': 'Estatísticas',
         'Analytics without spying': 'Estatísticas sem espionar',
+        'Are you sure you want to delete your account?': 'Tem certeza de que quer excluir a sua conta?',
+        'Avatar': 'Avatar',
         'Avatar, banner, color palettes, solid or gradient backgrounds — with automatic dark mode and readable text guaranteed.':
             'Avatar, banner, paletas de cores, fundos sólidos ou degradês — com modo escuro automático e texto legível garantido.',
+        'Back to home': 'Voltar ao início',
         'Background': 'Fundo',
+        'Banner': 'Capa',
         'Bio': 'Bio',
         'Build a WhatsApp link': 'Criar um link de WhatsApp',
         'Click stats with zero cookies and zero personal data stored. No consent banner needed — private by design.':
@@ -247,6 +289,7 @@ const nexo = {
         'Clicks': 'Cliques',
         'Clicks per day': 'Cliques por dia',
         'Clicks per day, last :days days': 'Cliques por dia, últimos :days dias',
+        'Color': 'Cor',
         'Copied!': 'Copiado!',
         'Copy URL': 'Copiar URL',
         'Create your page': 'Crie sua página',
@@ -265,6 +308,7 @@ const nexo = {
         'Expired': 'Expirado',
         'Fast and lightweight': 'Rápido e leve',
         'Features': 'Recursos',
+        'For security reasons, reload the page and try again.': 'Por segurança, recarregue a página e tente novamente.',
         'Gradient': 'Degradê',
         'Hidden': 'Oculto',
         'Hide': 'Ocultar',
@@ -286,14 +330,18 @@ const nexo = {
         'No links yet. Add your first one!': 'Ainda não há links. Adicione o primeiro!',
         'No vendor lock-in': 'Sem dependência de plataformas',
         'Nothing here yet.': 'Ainda não há nada aqui.',
+        'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.':
+            'Depois que a sua conta for excluída, todos os seus recursos e dados serão apagados permanentemente. Digite a sua senha para confirmar que quer excluir a conta definitivamente.',
         'Open source': 'Código aberto',
         'Open source on GitHub': 'Código aberto no GitHub',
         "Open-source link-in-bio page you host yourself, with visitor analytics that don't spy on anyone.":
             'Página link-in-bio de código aberto que você mesmo hospeda, com estatísticas de visitantes que não espionam ninguém.',
+        'Page not found': 'Página não encontrada',
         'Per link': 'Por link',
         'Prefilled message (optional)': 'Mensagem pré-preenchida (opcional)',
         'Print it, add it to a business card or a story — it always points to your page.':
             'Imprima, coloque em um cartão de visita ou em um story — sempre aponta para a sua página.',
+        'Privacy': 'Privacidade',
         'QR code that opens your page': 'Código QR que abre a sua página',
         'Remove :platform': 'Remover :platform',
         'Remove avatar': 'Remover avatar',
@@ -315,19 +363,27 @@ const nexo = {
         'Social icons': 'Ícones sociais',
         'Social profiles': 'Perfis sociais',
         'Solid color': 'Cor sólida',
+        'Something went wrong': 'Algo deu errado',
         'Starts at (optional)': 'Começa em (opcional)',
+        'Terms': 'Termos',
         'The :attribute ":input" is reserved.': 'O :attribute ":input" está reservado.',
         'The :attribute may only contain lowercase letters, numbers, hyphens and underscores.':
             'O campo :attribute só pode conter minúsculas, números, hifens e sublinhados.',
         'The :attribute must be a valid URL.': 'O campo :attribute deve ser uma URL válida.',
         'The :attribute must start with http://, https://, mailto: or tel:.':
             'O campo :attribute deve começar com http://, https://, mailto: ou tel:.',
+        'The page expired': 'A página expirou',
+        'The problem is on our side. Try again in a few minutes.':
+            'O problema é do nosso lado. Tente novamente em alguns minutos.',
         'This will be your public page URL. Lowercase letters, numbers, hyphens and underscores.':
             'Esta será a URL pública da sua página. Minúsculas, números, hifens e sublinhados.',
         'Title': 'Título',
         'To': 'Até',
+        'Too many requests': 'Muitas solicitações',
         'Top referrers': 'Principais referências',
         'Total clicks': 'Total de cliques',
+        'URL': 'URL',
+        'Under maintenance': 'Em manutenção',
         'Unique': 'Únicos',
         'Unique visitors': 'Visitantes únicos',
         'Use the international format, e.g. +5491122334455.': 'Use o formato internacional, ex.: +5491122334455.',
@@ -336,7 +392,14 @@ const nexo = {
         'Used for your avatar ring and highlighted links.': 'Usado no anel do seu avatar e nos links destacados.',
         'Username': 'Nome de usuário',
         'View my page': 'Ver minha página',
+        'We are making improvements. We will be back in a few minutes.':
+            'Estamos fazendo melhorias. Voltamos em alguns minutos.',
+        'We could not find what you were looking for. The link may have changed or the page may no longer exist.':
+            'Não encontramos o que você procurava. O link pode ter mudado ou a página pode não existir mais.',
         'You already added this platform.': 'Você já adicionou esta plataforma.',
+        'You do not have permission to see this page.': 'Você não tem permissão para ver esta página.',
+        'You went a little too fast. Wait a moment and try again.':
+            'Você foi um pouco rápido demais. Espere um momento e tente novamente.',
         'Your data.': 'Seus dados.',
         'Your domain.': 'Seu domínio.',
         'Your handle, email or URL': 'Seu usuário, e-mail ou URL',
@@ -426,6 +489,44 @@ const nexo = {
     },
 };
 
+// Every literal string the app hands to Laravel for translation. English is the
+// source locale here (lang/es.json and lang/pt.json are keyed by the English
+// text), so a key absent from BOTH laravel-lang and the `nexo` map above renders
+// in English to Spanish and Portuguese visitors — silently, which is why this is
+// checked rather than trusted.
+const sourceStrings = () => {
+    const phpFiles = (dir) =>
+        readdirSync(dir).flatMap((entry) => {
+            const full = join(dir, entry);
+            return statSync(full).isDirectory() ? phpFiles(full) : full.endsWith('.php') ? [full] : [];
+        });
+
+    // __() and trans_choice(), plus the $fail() messages of custom rules (they
+    // are translated through ->translate()). Both quote styles.
+    const pattern = /(?:__|trans_choice|\$fail)\(\s*(?:'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)")/g;
+    const keys = new Set();
+
+    for (const root of SOURCE_ROOTS) {
+        for (const file of phpFiles(root)) {
+            for (const match of readFileSync(file, 'utf8').matchAll(pattern)) {
+                const key = match[1] !== undefined
+                    ? match[1].replace(/\\'/g, "'")
+                    : match[2].replace(/\\"/g, '"');
+
+                // Not literal UI text: lang-file lookups ("nexo.help.title") and
+                // interpolated keys ("legal.{$page}", resolved at runtime).
+                if (/^[a-z0-9_.-]+$/.test(key) || /\{\$|\$\{/.test(key)) {
+                    continue;
+                }
+
+                keys.add(key);
+            }
+        }
+    }
+
+    return [...keys].sort();
+};
+
 const phpExport = (value, indent = 1) => {
     const pad = '    '.repeat(indent);
     if (typeof value !== 'object' || value === null) {
@@ -456,6 +557,9 @@ const locales = [
     { code: 'pt', source: 'pt_BR' },
 ];
 
+const sourced = sourceStrings();
+let failed = false;
+
 for (const { code, source } of locales) {
     const base = `vendor/laravel-lang/lang/locales/${source}`;
     const php = JSON.parse(readFileSync(`${base}/php.json`, 'utf8'));
@@ -469,12 +573,43 @@ for (const { code, source } of locales) {
         else groups.validation[key] = value;
     }
 
-    mkdirSync(`lang/${code}`, { recursive: true });
-    for (const [group, entries] of Object.entries(groups)) {
-        writeFileSync(`lang/${code}/${group}.php`, `<?php\n\nreturn ${phpExport(nest(entries))};\n`);
+    const merged = { ...json, ...nexo[code] };
+
+    const missing = sourced.filter((key) => !(key in merged));
+    if (missing.length > 0) {
+        failed = true;
+        console.error(`\n[${code}] ${missing.length} source strings have no translation (add them to the \`nexo\` map in this file):`);
+        missing.forEach((key) => console.error(`  - ${key}`));
     }
 
-    const merged = { ...json, ...nexo[code] };
-    writeFileSync(`lang/${code}.json`, JSON.stringify(merged, null, 4) + '\n');
+    const files = { [`lang/${code}.json`]: JSON.stringify(merged, null, 4) + '\n' };
+    for (const [group, entries] of Object.entries(groups)) {
+        files[`lang/${code}/${group}.php`] = `<?php\n\nreturn ${phpExport(nest(entries))};\n`;
+    }
+
+    if (CHECK) {
+        const stale = Object.keys(files).filter(
+            (path) => !existsSync(path) || readFileSync(path, 'utf8') !== files[path],
+        );
+
+        if (stale.length > 0) {
+            failed = true;
+            console.error(`\n[${code}] out of date, re-run the generator without --check: ${stale.join(', ')}`);
+        }
+
+        continue;
+    }
+
+    mkdirSync(`lang/${code}`, { recursive: true });
+    for (const [path, contents] of Object.entries(files)) {
+        writeFileSync(path, contents);
+    }
+
     console.log(`✓ ${code}: ${Object.keys(merged).length} JSON strings, validation/auth/passwords/pagination PHP files`);
 }
+
+if (CHECK && !failed) {
+    console.log(`✓ ${sourced.length} source strings translated in es/pt, and the lang files match the generator.`);
+}
+
+process.exit(failed ? 1 : 0);

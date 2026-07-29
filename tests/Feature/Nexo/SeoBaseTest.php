@@ -24,6 +24,25 @@ it('serves meta description, canonical, open graph and hreflang on the home page
         ->not->toContain('&amp;#0');
 });
 
+it('serves the same standard head on the other trilingual public pages', function () {
+    // These pages exist in es/en/pt, so they need the hreflang set the shared
+    // component emits — a hand-rolled <head> is how /help lost it once already.
+    // The storefront (/{username}) is deliberately NOT here: it keeps its own
+    // per-page head (see the comment in pages/show.blade.php).
+    foreach ([route('help'), route('legal.privacy'), route('legal.terms')] as $url) {
+        $html = $this->get($url)->assertOk()->getContent();
+
+        expect($html)
+            ->toContain('<link rel="canonical" href="'.$url.'"')
+            ->toContain('<meta property="og:title"')
+            ->toContain('<meta property="og:image"')
+            ->toContain('hreflang="es"')
+            ->toContain('hreflang="en"')
+            ->toContain('hreflang="pt"')
+            ->toContain('hreflang="x-default"');
+    }
+});
+
 it('serves robots.txt with the private surface disallowed and a sitemap pointer', function () {
     $response = $this->get('/robots.txt');
 
