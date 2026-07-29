@@ -102,3 +102,17 @@ it('reserves the legal paths so no public page can shadow them', function () {
         expect(in_array($segment, $reserved, true))->toBeTrue("'{$segment}' must be a reserved username — the /{username} catch-all would otherwise let a user claim it.");
     }
 });
+
+it('names the instance operator on the legal pages when configured', function () {
+    // The env-driven operator/contact contract (templates/nexo-ui/pages): with
+    // the values set, the pages must say who answers for this instance — this
+    // tool shipped its legal pages without the section and nobody noticed,
+    // because nothing asserted it.
+    config()->set('nexo.legal.operator', 'Example Operator');
+    config()->set('nexo.legal.contact', 'legal@example.test');
+
+    $html = $this->get(route('legal.privacy'))->assertOk()->getContent();
+
+    expect(str_contains($html, 'Example Operator'))->toBeTrue('The operator section did not render.');
+    expect(str_contains($html, 'legal@example.test'))->toBeTrue('The contact did not render.');
+});

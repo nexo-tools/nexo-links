@@ -33,6 +33,8 @@ class LegalController extends Controller
             // the one who answers data requests, and it is env-driven so a
             // self-hosted copy never points at the upstream author.
             'contactUrl' => config('nexo.support_url') ?: 'mailto:'.config('nexo.support_email', ''),
+            'operator' => config('nexo.legal.operator'),
+            'contact' => config('nexo.legal.contact'),
         ]);
     }
 }

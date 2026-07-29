@@ -10,6 +10,13 @@
 return [
     'updated' => 'Last updated: 28 July 2026',
 
+    // Rendered only when NEXO_LEGAL_OPERATOR / NEXO_LEGAL_CONTACT are set.
+    'operator' => [
+        'h' => 'Who runs this instance',
+        'p' => 'This instance is run by :operator.',
+        'contact' => 'For anything about your data you can write to :contact.',
+    ],
+
     'privacy' => [
         'title' => 'Privacy',
         'intro' => 'This instance of Nexo Links is open source and self-hosted. We collect the minimum needed for your links page to work, and nothing else. There are no tracking cookies, no third-party analytics, and no requests to anyone else\'s servers from any page.',

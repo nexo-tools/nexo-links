@@ -11,6 +11,13 @@
 return [
     'updated' => 'Última actualización: 28 de julio de 2026',
 
+    // Rendered only when NEXO_LEGAL_OPERATOR / NEXO_LEGAL_CONTACT are set.
+    'operator' => [
+        'h' => 'Quién opera esta instancia',
+        'p' => 'Esta instancia la opera :operator.',
+        'contact' => 'Para cualquier consulta sobre tus datos podés escribir a :contact.',
+    ],
+
     'privacy' => [
         'title' => 'Privacidad',
         'intro' => 'Esta instancia de Nexo Links es open source y self-hosted. Recogemos lo mínimo para que tu página de links funcione, y nada más. No hay cookies de seguimiento, ni analítica de terceros, ni pedidos a servidores ajenos desde ninguna página.',
