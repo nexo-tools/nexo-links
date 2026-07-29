@@ -25,3 +25,6 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Briefing personal del agente (rutas locales): nunca se publica.
+/CLAUDE.local.md

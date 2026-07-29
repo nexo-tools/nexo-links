@@ -47,6 +47,16 @@ even on cheap shared hosting (PHP + MySQL).
 - **Accessible** — WCAG AA baseline: keyboard navigation, focus rings,
   labels, reduced-motion support and AA contrast.
 
+## Screenshots
+
+Captured from the live instance.
+
+| Light | Dark |
+| --- | --- |
+| <img src="docs/screenshots/home-light.png" alt="Nexo Links in light theme"> | <img src="docs/screenshots/home-dark.png" alt="Nexo Links in dark theme"> |
+
+See it for real at the [live demo](https://nexolinks.alvarocdev.com).
+
 ## Tech stack
 
 Laravel 13 · MySQL 8 · Blade + Alpine.js + Tailwind CSS · Vite
@@ -55,43 +65,14 @@ Quality: [Pint](https://laravel.com/docs/pint) ·
 [Larastan](https://github.com/larastan/larastan) ·
 [Pest](https://pestphp.com) (200+ tests) · GitHub Actions CI
 
-## Quick start (local)
-
-Requirements: Docker — everything else runs in containers via
-[Laravel Sail](https://laravel.com/docs/sail).
-
-```bash
-git clone https://github.com/nexo-tools/nexo-links.git
-cd nexo-links
-cp .env.example .env
-docker run --rm -v "$(pwd):/app" -w /app composer:latest composer install
-./vendor/bin/sail up -d
-./vendor/bin/sail artisan key:generate
-./vendor/bin/sail artisan migrate --seed
-./vendor/bin/sail npm install && ./vendor/bin/sail npm run build
-```
-
-Open [http://localhost](http://localhost) — demo account: `demo@nexo.test` /
-`password`. Local email inbox (Mailpit): [http://localhost:8025](http://localhost:8025).
-
 ## Self-hosting
 
-Nexo Links runs on any host with PHP 8.3+ and MySQL — including shared hosting.
-See the step-by-step guide: **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**.
+A standard Laravel app: PHP 8.3+, MySQL, and anything from cheap shared hosting to a
+VPS. Multi-instance by design — your page lives on your own domain, with your own data.
 
-### Configuration
-
-| Env var | Purpose | Default |
-| --- | --- | --- |
-| `APP_TIMEZONE` | Timezone for link scheduling | `UTC` |
-| `NEXO_ATTRIBUTION_LABEL` | Public page footer text | `made with Nexo Links` |
-| `NEXO_ATTRIBUTION_URL` | Footer link target | this repo |
-| `NEXO_EXAMPLE_USERNAME` | Page linked as the landing's live example | `demo` |
-| `NEXO_ECOSYSTEM_CURRENT` | This tool's key in the shared app-switcher | `nexolinks` |
-| `NEXO_SUPPORT_EMAIL` | Contact address on the /help center | `hola@alvarocdev.com` |
-
-Theme presets, social platforms, reserved usernames, report reasons and
-locales live in [config/nexo.php](config/nexo.php).
+**[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** has the real steps: running it locally, the
+environment reference (attribution, optional Nexo ID SSO, beacon) and the production
+deploy.
 
 ## Project docs
 
@@ -102,19 +83,18 @@ locales live in [config/nexo.php](config/nexo.php).
 
 ## Nexo ecosystem
 
-Nexo is a family of open-source, self-hostable tools that share one visual identity
-([nexo-brand](https://github.com/nexo-tools)), one optional account
-([Nexo ID](https://github.com/nexo-tools/nexo-id) SSO) and one set of engineering
-standards. Every tool runs **fully standalone** — the ecosystem is opt-in.
+Nexo is a family of open-source, self-hostable tools that share one visual identity,
+one optional account ([Nexo ID](https://github.com/nexo-tools/nexo-id) SSO) and one set of
+engineering standards. Every tool runs **fully standalone** — the ecosystem is opt-in.
 
-| Tool | What it is | Repo |
-| --- | --- | --- |
-| **Nexo Tools** | Ecosystem hub — discover the tools and hop between them with one account | [nexo-tools](https://github.com/nexo-tools/nexo-tools) |
-| **Nexo Links** | Link-in-bio you host yourself (Linktree alternative) | — you are here |
-| **Nexo Agenda** | Bookings for service businesses (AgendaPro / Fresha / Booksy alternative) | [nexo-agenda](https://github.com/nexo-tools/nexo-agenda) |
-| **Nexo Short** | Self-hosted URL shortener | [nexo-short](https://github.com/nexo-tools/nexo-short) |
-| **Nexo Events** | Event tickets and passes | [nexo-events](https://github.com/nexo-tools/nexo-events) |
-| **Nexo ID** | One account for every tool — OAuth 2.0 / OIDC SSO | [nexo-id](https://github.com/nexo-tools/nexo-id) |
+| Tool | What it is | Live | Repo |
+| --- | --- | --- | --- |
+| **Nexo Tools** | Ecosystem hub — discover the tools and hop between them with one account | [nexotools.alvarocdev.com](https://nexotools.alvarocdev.com) | [nexo-tools](https://github.com/nexo-tools/nexo-tools) |
+| **Nexo ID** | One account for every tool — OAuth 2.0 / OIDC SSO | [nexoid.alvarocdev.com](https://nexoid.alvarocdev.com) | [nexo-id](https://github.com/nexo-tools/nexo-id) |
+| **Nexo Links** | Link-in-bio you host yourself (Linktree alternative) | [nexolinks.alvarocdev.com](https://nexolinks.alvarocdev.com) | — you are here |
+| **Nexo Agenda** | Bookings for service businesses (Fresha / Booksy alternative) | [nexoagenda.alvarocdev.com](https://nexoagenda.alvarocdev.com) | [nexo-agenda](https://github.com/nexo-tools/nexo-agenda) |
+| **Nexo Short** | URL shortener with private, cookieless stats | [nexoshort.alvarocdev.com](https://nexoshort.alvarocdev.com) | [nexo-short](https://github.com/nexo-tools/nexo-short) |
+| **Nexo Events** | Event tickets, passes and QR check-in | [nexoevents.alvarocdev.com](https://nexoevents.alvarocdev.com) | [nexo-events](https://github.com/nexo-tools/nexo-events) |
 
 New to Nexo? Start at **[nexotools.alvarocdev.com](https://nexotools.alvarocdev.com)**.
 Built by **[alvarocdev.com](https://alvarocdev.com)** — the tech behind Nexo.
@@ -122,3 +102,8 @@ Built by **[alvarocdev.com](https://alvarocdev.com)** — the tech behind Nexo.
 ## License & credits
 
 [MIT](LICENSE). Built by **Alvaro Carrizales** — [alvarocdev.com](https://alvarocdev.com).
+
+---
+
+Status: **live** at [nexolinks.alvarocdev.com](https://nexolinks.alvarocdev.com) — pages,
+cookieless analytics, scheduling and countdowns, with optional Nexo ID sign-in.
