@@ -14,7 +14,7 @@ return [
 
     'attribution' => [
         'label' => env('NEXO_ATTRIBUTION_LABEL', 'made with Nexo Links'),
-        'url' => env('NEXO_ATTRIBUTION_URL', 'https://alvarocdev.com'),
+        'url' => env('NEXO_ATTRIBUTION_URL'),
     ],
 
     /*
