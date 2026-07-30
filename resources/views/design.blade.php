@@ -1,9 +1,9 @@
-<x-app-layout>
+<x-app-layout :title="__('Design')">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-ink leading-tight">
+            <h1 class="font-semibold text-xl text-ink leading-tight">
                 {{ __('Design') }}
-            </h2>
+            </h1>
             <a href="{{ url('/'.$page->username) }}" target="_blank" class="text-sm text-primary hover:text-primary-hover underline">
                 {{ __('View my page') }} ↗
             </a>
@@ -13,7 +13,8 @@
     <div class="py-12">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <form method="POST" action="{{ route('design.update') }}" enctype="multipart/form-data"
-                  x-data="{ backgroundType: '{{ old('background_type', $page->background_type) }}' }"
+                  x-data="{ backgroundType: '{{ old('background_type', $page->background_type) }}', sending: false }"
+                  @submit="sending = true"
                   class="space-y-6">
                 @csrf
                 @method('PATCH')
@@ -116,7 +117,7 @@
                 </div>
 
                 <div>
-                    <x-primary-button>{{ __('Save') }}</x-primary-button>
+                    <x-primary-button x-bind:disabled="sending" x-bind:aria-busy="sending">{{ __('Save') }}</x-primary-button>
                 </div>
             </form>
         </div>

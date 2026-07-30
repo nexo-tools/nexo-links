@@ -1,16 +1,19 @@
 {{-- Scheduling and highlight fields shared by the create and edit link forms. --}}
 @php($editing = $link ?? null)
+{{-- The dashboard renders this once per link plus once for the create form, so
+     every id has to be suffixed or the labels point at the first copy. --}}
+@php($uid = $editing?->id ?? 'new')
 
 <div class="grid gap-4 sm:grid-cols-2">
     <div>
-        <x-input-label :value="__('Starts at (optional)')" />
-        <x-text-input type="datetime-local" name="starts_at" class="mt-1 block w-full"
+        <x-input-label :for="'starts_at-'.$uid" :value="__('Starts at (optional)')" />
+        <x-text-input :id="'starts_at-'.$uid" type="datetime-local" name="starts_at" class="mt-1 block w-full"
                       :value="old('starts_at', $editing?->starts_at?->format('Y-m-d\TH:i'))" />
         <x-input-error :messages="$errors->get('starts_at')" class="mt-2" />
     </div>
     <div>
-        <x-input-label :value="__('Ends at (optional)')" />
-        <x-text-input type="datetime-local" name="ends_at" class="mt-1 block w-full"
+        <x-input-label :for="'ends_at-'.$uid" :value="__('Ends at (optional)')" />
+        <x-text-input :id="'ends_at-'.$uid" type="datetime-local" name="ends_at" class="mt-1 block w-full"
                       :value="old('ends_at', $editing?->ends_at?->format('Y-m-d\TH:i'))" />
         <x-input-error :messages="$errors->get('ends_at')" class="mt-2" />
     </div>

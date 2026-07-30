@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Page;
 use App\Models\User;
 
 test('login screen can be rendered', function () {
@@ -38,4 +39,20 @@ test('users can logout', function () {
 
     $this->assertGuest();
     $response->assertRedirect('/');
+});
+
+test('the account menu logs out by submitting, not by following a link', function () {
+    // The menu item used to be an <a href="/logout"> with @click.prevent. The
+    // route is POST-only, so without JS it navigated by GET and returned 405 —
+    // and an <a> inside the <form> is invalid HTML either way. This is invisible
+    // in a browser with Alpine working, hence the guard.
+    $page = Page::factory()->create();
+
+    $html = $this->actingAs($page->user)->get('/dashboard')->assertOk()->getContent();
+
+    expect($html)->not->toContain('href="'.route('logout').'"');
+
+    // And following such a link would not have logged anyone out anyway.
+    $this->actingAs($page->user)->get('/logout');
+    $this->assertAuthenticated();
 });

@@ -1,9 +1,9 @@
-<x-app-layout>
+<x-app-layout :title="__('Links')">
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-ink leading-tight">
+            <h1 class="font-semibold text-xl text-ink leading-tight">
                 {{ __('Links') }}
-            </h2>
+            </h1>
             <a href="{{ url('/'.$page->username) }}" target="_blank" class="text-sm text-primary hover:text-primary-hover underline">
                 {{ __('View my page') }} ↗
             </a>
@@ -42,7 +42,8 @@
                     + {{ __('Add link') }}
                 </button>
 
-                <form method="POST" action="{{ route('links.store') }}" x-show="open" x-cloak class="space-y-4">
+                <form method="POST" action="{{ route('links.store') }}" x-show="open" x-cloak class="space-y-4"
+                      x-data="{ sending: false }" @submit="sending = true">
                     @csrf
                     <div>
                         <x-input-label for="title" :value="__('Title')" />
@@ -60,14 +61,16 @@
 
                         <div x-show="wa" x-cloak class="mt-2 space-y-2 rounded-md bg-success-subtle p-3">
                             <div class="flex flex-wrap gap-2">
-                                <select x-model="code" class="rounded-md border-control bg-surface text-ink text-sm shadow-sm focus:border-primary focus:ring-ring">
+                                <select x-model="code" aria-label="{{ __('Country code') }}" class="rounded-md border-control bg-surface text-ink text-sm shadow-sm focus:border-primary focus:ring-ring">
                                     @foreach ($phonePrefixes as $prefixCode => $prefixLabel)
                                         <option value="{{ $prefixCode }}">{{ $prefixLabel }}</option>
                                     @endforeach
                                 </select>
                                 <input type="text" x-model="phone" inputmode="numeric" placeholder="{{ __('1122334455') }}"
+                                       aria-label="{{ __('Phone number') }}"
                                        class="block flex-1 min-w-32 rounded-md border-control bg-surface text-ink text-sm shadow-sm focus:border-primary focus:ring-ring">
                                 <input type="text" x-model="message" placeholder="{{ __('Prefilled message (optional)') }}"
+                                       aria-label="{{ __('Prefilled message (optional)') }}"
                                        class="block w-full rounded-md border-control bg-surface text-ink text-sm shadow-sm focus:border-primary focus:ring-ring">
                             </div>
                             <button type="button"
@@ -81,7 +84,7 @@
                     @include('links.fields')
 
                     <div class="flex items-center gap-4">
-                        <x-primary-button>{{ __('Save') }}</x-primary-button>
+                        <x-primary-button x-bind:disabled="sending" x-bind:aria-busy="sending">{{ __('Save') }}</x-primary-button>
                         <button type="button" @click="open = false" class="text-sm text-muted hover:text-ink">{{ __('Cancel') }}</button>
                     </div>
                 </form>
@@ -129,17 +132,17 @@
                                         @csrf
                                         @method('PATCH')
                                         <input type="hidden" name="is_visible" value="{{ $link->is_visible ? 0 : 1 }}">
-                                        <button class="text-sm text-muted hover:text-ink underline">
+                                        <button class="inline-flex min-h-11 items-center text-sm text-muted underline hover:text-ink">
                                             {{ $link->is_visible ? __('Hide') : __('Show') }}
                                         </button>
                                     </form>
 
-                                    <button type="button" @click="editing = ! editing" x-bind:aria-expanded="editing" class="text-sm text-muted hover:text-ink underline">{{ __('Edit') }}</button>
+                                    <button type="button" @click="editing = ! editing" x-bind:aria-expanded="editing" class="inline-flex min-h-11 items-center text-sm text-muted underline hover:text-ink">{{ __('Edit') }}</button>
 
                                     <form method="POST" action="{{ route('links.destroy', $link) }}" @submit="confirm('{{ __('Delete this link?') }}') || $event.preventDefault()">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="text-sm text-danger underline hover:no-underline">{{ __('Delete') }}</button>
+                                        <button class="inline-flex min-h-11 items-center text-sm text-danger underline hover:no-underline">{{ __('Delete') }}</button>
                                     </form>
                                 </div>
                             </div>
@@ -149,12 +152,12 @@
                                 @method('PATCH')
                                 <input type="hidden" name="editing" value="{{ $link->id }}">
                                 <div>
-                                    <x-input-label :value="__('Title')" />
-                                    <x-text-input name="title" type="text" class="mt-1 block w-full" :value="old('editing') == $link->id ? old('title') : $link->title" required maxlength="120" />
+                                    <x-input-label :for="'title-'.$link->id" :value="__('Title')" />
+                                    <x-text-input :id="'title-'.$link->id" name="title" type="text" class="mt-1 block w-full" :value="old('editing') == $link->id ? old('title') : $link->title" required maxlength="120" />
                                 </div>
                                 <div>
-                                    <x-input-label :value="__('URL')" />
-                                    <x-text-input name="url" type="text" class="mt-1 block w-full" :value="old('editing') == $link->id ? old('url') : $link->url" required maxlength="2048" />
+                                    <x-input-label :for="'url-'.$link->id" :value="__('URL')" />
+                                    <x-text-input :id="'url-'.$link->id" name="url" type="text" class="mt-1 block w-full" :value="old('editing') == $link->id ? old('url') : $link->url" required maxlength="2048" />
                                 </div>
 
                                 @include('links.fields', ['link' => $link])
@@ -191,7 +194,9 @@
                 @endif
 
                 <form method="POST" action="{{ route('socials.store') }}" class="mt-4 flex flex-wrap items-start gap-3"
+                      @submit="sending = true"
                       x-data="{
+                          sending: false,
                           platform: '{{ old('platform', 'instagram') }}',
                           code: '+54',
                           national: '',
@@ -232,7 +237,7 @@
                         <x-input-error :messages="$errors->get('platform')" class="mt-1" />
                         <x-input-error :messages="$errors->get('value')" class="mt-1" />
                     </div>
-                    <x-primary-button>{{ __('Add') }}</x-primary-button>
+                    <x-primary-button x-bind:disabled="sending" x-bind:aria-busy="sending">{{ __('Add') }}</x-primary-button>
                 </form>
             </div>
 

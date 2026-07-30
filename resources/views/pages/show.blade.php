@@ -34,12 +34,12 @@
     @vite('resources/css/app.css')
 </head>
 <body @class([
-        'min-h-screen antialiased',
+        'min-h-screen font-sans antialiased',
         'bg-neutral-100 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50' => $customBg === null,
         'text-neutral-50' => $lightInk,
         'text-neutral-900' => $customBg !== null && ! $lightInk,
     ])
-    style="{{ $customBg ? $customBg.'; ' : '' }}font-family: ui-sans-serif, system-ui, -apple-system, sans-serif">
+    style="{{ $customBg ?: '' }}">
     <main class="mx-auto flex min-h-screen w-full max-w-md flex-col px-5 pb-8 {{ $page->banner_path ? 'pt-5' : 'pt-14 sm:pt-20' }}">
         <header class="text-center">
             @if ($page->banner_path)

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ ($title ?? null) ? $title.' · '.config('app.name') : config('app.name') }}</title>
 
         @include('partials.brand-head')
 
@@ -50,10 +50,7 @@
                         <x-dropdown-link :href="route('help')">{{ __('nexo.help.title') }}</x-dropdown-link>
                         <form method="POST" action="{{ config('nexo-sso.enabled') ? route('nexo-sso.logout') : route('logout') }}">
                             @csrf
-                            <x-dropdown-link :href="route('logout')"
-                                @click.prevent="$el.closest('form').submit()">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
+                            <x-dropdown-link>{{ __('Log Out') }}</x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>

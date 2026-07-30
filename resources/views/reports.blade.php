@@ -1,8 +1,8 @@
-<x-app-layout>
+<x-app-layout :title="__('Reports')">
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-ink leading-tight">
+        <h1 class="font-semibold text-xl text-ink leading-tight">
             {{ __('Reports') }}
-        </h2>
+        </h1>
     </x-slot>
 
     <div class="py-12">
