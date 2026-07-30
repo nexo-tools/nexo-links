@@ -21,8 +21,9 @@ return [
     ],
     'footer' => [
         'part_of' => 'Parte do ecossistema Nexo',
-        'powered_by' => 'Feito por',
         'source' => 'Código aberto no GitHub',
+        'privacy' => 'Privacidade',
+        'terms' => 'Termos',
     ],
     'help' => [
         'title' => 'Central de ajuda',
