@@ -83,7 +83,7 @@ return [
             ],
             [
                 'h' => 'Tu cuenta y tu nombre de usuario',
-                'p' => 'Necesitás una cuenta y verificar tu email para publicar. Sos responsable de mantener tu contraseña a salvo y de lo que se haga desde tu cuenta. Hay nombres de usuario que no se pueden registrar: los que chocan con las direcciones de la propia aplicación y los que servirían para hacerse pasar por el sitio. Quien opera esta instancia puede recuperar un nombre de usuario que se esté usando para suplantar a una persona o marca.',
+                'p' => 'Necesitas una cuenta y verificar tu email para publicar. Eres responsable de mantener tu contraseña a salvo y de lo que se haga desde tu cuenta. Hay nombres de usuario que no se pueden registrar: los que chocan con las direcciones de la propia aplicación y los que servirían para hacerse pasar por el sitio. Quien opera esta instancia puede recuperar un nombre de usuario que se esté usando para suplantar a una persona o marca.',
             ],
             [
                 'h' => 'Responsabilidad sobre tus links',
