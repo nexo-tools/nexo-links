@@ -43,9 +43,8 @@ test('users can logout', function () {
 
 test('the account menu logs out by submitting, not by following a link', function () {
     // The menu item used to be an <a href="/logout"> with @click.prevent. The
-    // route is POST-only, so without JS it navigated by GET and returned 405 —
-    // and an <a> inside the <form> is invalid HTML either way. This is invisible
-    // in a browser with Alpine working, hence the guard.
+    // route is POST-only, so without JS it navigated by GET and returned 405.
+    // This is invisible in a browser with Alpine working, hence the guard.
     $page = Page::factory()->create();
 
     $html = $this->actingAs($page->user)->get('/dashboard')->assertOk()->getContent();
