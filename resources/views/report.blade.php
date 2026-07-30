@@ -11,20 +11,20 @@
 
     @vite('resources/css/app.css')
 </head>
-<body class="min-h-screen bg-neutral-50 text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-50" style="font-family: ui-sans-serif, system-ui, -apple-system, sans-serif">
+<body class="min-h-screen bg-bg font-sans text-ink antialiased">
     <main class="mx-auto flex min-h-screen w-full max-w-md flex-col px-5 py-14">
-        <a href="{{ route('page.show', $page->username) }}" class="text-sm text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300">
+        <a href="{{ route('page.show', $page->username) }}" class="text-sm text-muted hover:text-ink">
             ← {{ '@'.$page->username }}
         </a>
 
         <h1 class="mt-4 text-2xl font-bold tracking-tight">{{ __('Report this page') }}</h1>
 
         @if (session('status') === 'report-sent')
-            <div class="mt-8 rounded-2xl border border-green-200 bg-green-50 p-6 text-green-800 dark:border-green-900 dark:bg-green-950 dark:text-green-200">
+            <div class="nexo-flash mt-8" role="status">
                 {{ __('Thanks — your report was sent.') }}
             </div>
         @else
-            <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+            <p class="mt-2 text-sm text-muted">
                 {{ __('Something broken, misleading or abusive? Let the page owner know. Reports are anonymous.') }}
             </p>
 
@@ -34,40 +34,40 @@
                 <div>
                     <label for="reason" class="block text-sm font-medium">{{ __('What\'s wrong?') }}</label>
                     <select id="reason" name="reason" required
-                            class="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-neutral-700 dark:bg-neutral-900">
+                            class="mt-1 block w-full rounded-md border-control bg-bg text-ink shadow-sm focus:border-primary focus:ring-ring">
                         @foreach ($reasons as $value => $label)
                             <option value="{{ $value }}" @selected(old('reason') === $value)>{{ __($label) }}</option>
                         @endforeach
                     </select>
                     @error('reason')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-danger">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div>
                     <label for="link_id" class="block text-sm font-medium">{{ __('Which link? (optional)') }}</label>
                     <select id="link_id" name="link_id"
-                            class="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-neutral-700 dark:bg-neutral-900">
+                            class="mt-1 block w-full rounded-md border-control bg-bg text-ink shadow-sm focus:border-primary focus:ring-ring">
                         <option value="">{{ __('The whole page') }}</option>
                         @foreach ($links as $link)
                             <option value="{{ $link->id }}" @selected(old('link_id') == $link->id)>{{ $link->title }}</option>
                         @endforeach
                     </select>
                     @error('link_id')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-danger">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div>
                     <label for="details" class="block text-sm font-medium">{{ __('Details (optional)') }}</label>
                     <textarea id="details" name="details" rows="3" maxlength="500"
-                              class="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-neutral-700 dark:bg-neutral-900">{{ old('details') }}</textarea>
+                              class="mt-1 block w-full rounded-md border-control bg-bg text-ink shadow-sm focus:border-primary focus:ring-ring">{{ old('details') }}</textarea>
                     @error('details')
-                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-danger">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <button class="rounded-full bg-neutral-900 px-6 py-2.5 font-medium text-white transition hover:bg-neutral-700 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200">
+                <button class="nexo-btn nexo-btn--primary">
                     {{ __('Send report') }}
                 </button>
             </form>

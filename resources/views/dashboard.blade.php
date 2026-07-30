@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-ink leading-tight">
                 {{ __('Links') }}
             </h2>
-            <a href="{{ url('/'.$page->username) }}" target="_blank" class="text-sm text-indigo-600 hover:text-indigo-900 underline">
+            <a href="{{ url('/'.$page->username) }}" target="_blank" class="text-sm text-primary hover:text-primary-hover underline">
                 {{ __('View my page') }} ↗
             </a>
         </div>
@@ -14,29 +14,31 @@
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
             @if ($openReportsCount > 0)
-                <div class="rounded-lg border border-amber-200 bg-amber-50 p-4">
-                    <p class="text-sm text-amber-800">
+                <div class="nexo-flash nexo-flash--warning" role="status">
+                    <p>
                         {{ trans_choice('You have :count open report.|You have :count open reports.', $openReportsCount, ['count' => $openReportsCount]) }}
                         <a href="{{ route('reports.index') }}" class="font-medium underline hover:no-underline">{{ __('Review reports') }}</a>
                     </p>
                 </div>
             @endif
 
-            @if (session('status') === 'link-created')
-                <p class="text-sm text-green-600">{{ __('Link created.') }}</p>
-            @elseif (session('status') === 'link-updated')
-                <p class="text-sm text-green-600">{{ __('Link updated.') }}</p>
-            @elseif (session('status') === 'link-deleted')
-                <p class="text-sm text-green-600">{{ __('Link deleted.') }}</p>
-            @elseif (session('status') === 'social-created')
-                <p class="text-sm text-green-600">{{ __('Social icon added.') }}</p>
-            @elseif (session('status') === 'social-deleted')
-                <p class="text-sm text-green-600">{{ __('Social icon removed.') }}</p>
+            @php
+                $flash = [
+                    'link-created' => __('Link created.'),
+                    'link-updated' => __('Link updated.'),
+                    'link-deleted' => __('Link deleted.'),
+                    'social-created' => __('Social icon added.'),
+                    'social-deleted' => __('Social icon removed.'),
+                ][session('status')] ?? null;
+            @endphp
+
+            @if ($flash)
+                <p class="nexo-flash" role="status">{{ $flash }}</p>
             @endif
 
             <!-- Add link -->
             <div class="bg-surface shadow-sm sm:rounded-lg p-6" x-data="{ open: {{ $errors->hasAny(['title', 'url']) && ! old('editing') ? 'true' : 'false' }} }">
-                <button type="button" x-show="! open" @click="open = true" x-bind:aria-expanded="open" class="w-full text-center text-sm font-medium text-indigo-600 hover:text-indigo-900">
+                <button type="button" x-show="! open" @click="open = true" x-bind:aria-expanded="open" class="w-full text-center text-sm font-medium text-primary hover:text-primary-hover">
                     + {{ __('Add link') }}
                 </button>
 
@@ -52,25 +54,25 @@
                         <x-text-input id="url" name="url" type="text" class="mt-1 block w-full" :value="old('url')" required maxlength="2048" placeholder="https://…" />
                         <x-input-error :messages="$errors->get('url')" class="mt-2" />
 
-                        <button type="button" @click="wa = ! wa" class="mt-2 text-sm text-green-700 hover:text-green-900 underline">
+                        <button type="button" @click="wa = ! wa" class="mt-2 text-sm text-success-subtle-fg hover:underline">
                             {{ __('Build a WhatsApp link') }}
                         </button>
 
-                        <div x-show="wa" x-cloak class="mt-2 space-y-2 rounded-md bg-green-50 p-3">
+                        <div x-show="wa" x-cloak class="mt-2 space-y-2 rounded-md bg-success-subtle p-3">
                             <div class="flex flex-wrap gap-2">
-                                <select x-model="code" class="rounded-md border-line text-sm shadow-sm focus:border-green-500 focus:ring-green-500">
+                                <select x-model="code" class="rounded-md border-control bg-surface text-ink text-sm shadow-sm focus:border-primary focus:ring-ring">
                                     @foreach ($phonePrefixes as $prefixCode => $prefixLabel)
                                         <option value="{{ $prefixCode }}">{{ $prefixLabel }}</option>
                                     @endforeach
                                 </select>
                                 <input type="text" x-model="phone" inputmode="numeric" placeholder="{{ __('1122334455') }}"
-                                       class="block flex-1 min-w-32 rounded-md border-line text-sm shadow-sm focus:border-green-500 focus:ring-green-500">
+                                       class="block flex-1 min-w-32 rounded-md border-control bg-surface text-ink text-sm shadow-sm focus:border-primary focus:ring-ring">
                                 <input type="text" x-model="message" placeholder="{{ __('Prefilled message (optional)') }}"
-                                       class="block w-full rounded-md border-line text-sm shadow-sm focus:border-green-500 focus:ring-green-500">
+                                       class="block w-full rounded-md border-control bg-surface text-ink text-sm shadow-sm focus:border-primary focus:ring-ring">
                             </div>
                             <button type="button"
                                     @click="$el.closest('form').querySelector('#url').value = 'https://wa.me/' + (code + phone).replace(/[^0-9]/g, '') + (message ? '?text=' + encodeURIComponent(message) : ''); wa = false"
-                                    class="rounded-md bg-green-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-green-700">
+                                    class="rounded-md bg-success px-3 py-1.5 text-sm font-medium text-success-fg hover:brightness-110">
                                 {{ __('Use this link') }}
                             </button>
                         </div>
@@ -104,24 +106,24 @@
                                 <div class="flex-1 min-w-0">
                                     <p class="font-medium text-ink truncate">
                                         @if ($link->is_highlighted)
-                                            <span class="text-amber-500" title="{{ __('Highlighted') }}">★</span>
+                                            <span class="text-warning-subtle-fg" title="{{ __('Highlighted') }}">★</span>
                                         @endif
                                         {{ $link->title }}
                                         @unless ($link->is_visible)
                                             <span class="ms-1 inline-block rounded bg-bg-subtle px-1.5 py-0.5 text-xs text-muted">{{ __('Hidden') }}</span>
                                         @endunless
                                         @if ($link->starts_at?->isFuture())
-                                            <span class="ms-1 inline-block rounded bg-indigo-50 px-1.5 py-0.5 text-xs text-indigo-600" title="{{ $link->starts_at }}">{{ __('Scheduled') }}</span>
+                                            <span class="ms-1 inline-block rounded bg-primary-subtle px-1.5 py-0.5 text-xs text-primary-subtle-fg" title="{{ $link->starts_at }}">{{ __('Scheduled') }}</span>
                                         @endif
                                         @if ($link->ends_at?->isPast())
-                                            <span class="ms-1 inline-block rounded bg-amber-50 px-1.5 py-0.5 text-xs text-amber-700" title="{{ $link->ends_at }}">{{ __('Expired') }}</span>
+                                            <span class="ms-1 inline-block rounded bg-warning-subtle px-1.5 py-0.5 text-xs text-warning-subtle-fg" title="{{ $link->ends_at }}">{{ __('Expired') }}</span>
                                         @endif
                                     </p>
                                     <p class="text-sm text-muted truncate">{{ $link->url }}</p>
                                 </div>
 
                                 <div class="flex items-center gap-2 shrink-0">
-                                    <span class="text-sm text-muted tabular-nums" title="{{ __('Total clicks') }}">{{ $link->clicks_count }} ⟶</span>
+                                    <span class="text-sm text-muted tabular-nums">{{ trans_choice(':count click|:count clicks', $link->clicks_count) }}</span>
 
                                     <form method="POST" action="{{ route('links.update', $link) }}">
                                         @csrf
@@ -137,7 +139,7 @@
                                     <form method="POST" action="{{ route('links.destroy', $link) }}" @submit="confirm('{{ __('Delete this link?') }}') || $event.preventDefault()">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="text-sm text-red-600 hover:text-red-900 underline">{{ __('Delete') }}</button>
+                                        <button class="text-sm text-danger underline hover:no-underline">{{ __('Delete') }}</button>
                                     </form>
                                 </div>
                             </div>
@@ -178,10 +180,10 @@
                             <li class="flex items-center gap-2 rounded-full border border-line py-1 ps-3 pe-1">
                                 <span class="text-sm text-ink">{{ $social->label() }}</span>
                                 <span class="text-sm text-muted max-w-32 truncate">{{ $social->value }}</span>
-                                <form method="POST" action="{{ route('socials.destroy', $social) }}">
+                                <form method="POST" action="{{ route('socials.destroy', $social) }}" @submit="confirm(@js(__('Remove this social icon?'))) || $event.preventDefault()">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="flex h-6 w-6 items-center justify-center rounded-full text-subtle hover:bg-red-50 hover:text-red-600" aria-label="{{ __('Remove :platform', ['platform' => $social->label()]) }}">×</button>
+                                    <button class="flex h-6 w-6 items-center justify-center rounded-full text-muted hover:bg-danger-subtle hover:text-danger-subtle-fg" aria-label="{{ __('Remove :platform', ['platform' => $social->label()]) }}">×</button>
                                 </form>
                             </li>
                         @endforeach
@@ -199,7 +201,7 @@
                           get phoneValue() { return this.code + this.national.replace(/[^0-9]/g, '') },
                       }">
                     @csrf
-                    <select name="platform" x-model="platform" aria-label="{{ __('Platform') }}" class="rounded-md border-line text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <select name="platform" x-model="platform" aria-label="{{ __('Platform') }}" class="rounded-md border-control bg-surface text-ink text-sm shadow-sm focus:border-primary focus:ring-ring">
                         @foreach ($socialPlatforms as $key => $platform)
                             <option value="{{ $key }}" @selected(old('platform') === $key)>{{ $platform['label'] }}</option>
                         @endforeach
@@ -216,14 +218,14 @@
 
                         <!-- Phone with country selector -->
                         <div x-show="isPhone" x-cloak class="flex items-center gap-2">
-                            <select x-model="code" x-bind:disabled="! isPhone" aria-label="{{ __('Country code') }}" class="rounded-md border-line text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <select x-model="code" x-bind:disabled="! isPhone" aria-label="{{ __('Country code') }}" class="rounded-md border-control bg-surface text-ink text-sm shadow-sm focus:border-primary focus:ring-ring">
                                 @foreach ($phonePrefixes as $code => $label)
                                     <option value="{{ $code }}">{{ $label }}</option>
                                 @endforeach
                             </select>
                             <input type="text" x-model="national" inputmode="numeric" placeholder="{{ __('1122334455') }}"
                                    aria-label="{{ __('Phone number') }}"
-                                   class="block w-full rounded-md border-line text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                   class="block w-full rounded-md border-control bg-surface text-ink text-sm shadow-sm focus:border-primary focus:ring-ring">
                             <input type="hidden" name="value" x-bind:value="phoneValue" x-bind:disabled="! isPhone">
                         </div>
 
@@ -250,7 +252,7 @@
                                     @click="navigator.clipboard.writeText('{{ route('page.show', $page->username) }}').then(() => { copied = true; setTimeout(() => copied = false, 2000) })"
                                     class="rounded-md bg-bg-subtle px-3 py-1.5 text-sm font-medium text-ink hover:bg-line">
                                 <span x-show="! copied">{{ __('Copy URL') }}</span>
-                                <span x-show="copied" x-cloak class="text-green-700">{{ __('Copied!') }}</span>
+                                <span x-show="copied" x-cloak class="text-success-subtle-fg">{{ __('Copied!') }}</span>
                             </button>
 
                             <a href="{{ route('qr.show', ['download' => 1]) }}"

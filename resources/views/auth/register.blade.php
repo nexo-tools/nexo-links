@@ -13,10 +13,10 @@
         <div class="mt-4">
             <x-input-label for="username" :value="__('Username')" />
             <div class="flex items-center mt-1">
-                <span class="text-sm text-gray-500 me-1">{{ parse_url(config('app.url'), PHP_URL_HOST) }}/</span>
+                <span class="text-sm text-muted me-1">{{ parse_url(config('app.url'), PHP_URL_HOST) }}/</span>
                 <x-text-input id="username" class="block w-full" type="text" name="username" :value="old('username')" required autocomplete="off" pattern="[a-z0-9]+([\-_][a-z0-9]+)*" minlength="3" maxlength="30" spellcheck="false" />
             </div>
-            <p class="mt-1 text-sm text-gray-500">{{ __('This will be your public page URL. Lowercase letters, numbers, hyphens and underscores.') }}</p>
+            <p class="mt-1 text-sm text-muted">{{ __('This will be your public page URL. Lowercase letters, numbers, hyphens and underscores.') }}</p>
             <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
 
@@ -51,7 +51,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+            <a class="underline text-sm text-muted hover:text-ink rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 

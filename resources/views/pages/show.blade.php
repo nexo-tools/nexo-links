@@ -99,14 +99,16 @@
                     @elseif ($link->is_highlighted)
                         <a href="{{ route('link.visit', $link) }}" data-highlighted rel="noopener"
                            style="{{ $accentGradient }}"
-                           class="group relative block overflow-hidden rounded-2xl px-5 py-4 text-center font-semibold text-white shadow-lg transition duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-indigo-600 motion-reduce:transition-none">
+                           class="group relative block overflow-hidden rounded-2xl px-5 py-4 text-center font-semibold text-white shadow-lg transition duration-200 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white motion-reduce:transition-none">
                             <span class="absolute left-4 top-1/2 -mt-1 h-2 w-2 animate-pulse rounded-full bg-white/90 motion-reduce:animate-none" aria-hidden="true"></span>
                             {{ $link->title }}
                         </a>
                     @else
                         <a href="{{ route('link.visit', $link) }}" rel="noopener"
                            @class([
-                               'block rounded-2xl px-5 py-4 text-center font-medium shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 motion-reduce:transition-none',
+                               'block rounded-2xl px-5 py-4 text-center font-medium shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 motion-reduce:transition-none',
+                               'focus-visible:ring-white' => $lightInk,
+                               'focus-visible:ring-neutral-900 dark:focus-visible:ring-neutral-50' => ! $lightInk,
                                'border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700 hover:border-neutral-300' => $customBg === null,
                                'bg-white text-neutral-900' => $customBg !== null,
                            ])>
@@ -127,7 +129,9 @@
                     <a href="{{ $social->url() }}" rel="noopener" target="_blank"
                        aria-label="{{ $social->label() }}" title="{{ $social->label() }}"
                        @class([
-                           'flex h-11 w-11 items-center justify-center rounded-full transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 motion-reduce:transition-none',
+                           'flex h-11 w-11 items-center justify-center rounded-full transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 motion-reduce:transition-none',
+                           'focus-visible:ring-white' => $lightInk,
+                           'focus-visible:ring-neutral-900 dark:focus-visible:ring-neutral-50' => ! $lightInk,
                            'bg-white text-neutral-700 shadow-sm hover:text-neutral-900 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-50' => $customBg === null,
                            'bg-white/15 text-white hover:bg-white/25' => $lightInk,
                            'bg-white text-neutral-700 shadow-sm hover:text-neutral-900' => $customBg !== null && ! $lightInk,

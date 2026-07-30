@@ -15,7 +15,7 @@ return [
     'operator' => [
         'h' => 'Quién opera esta instancia',
         'p' => 'Esta instancia la opera :operator.',
-        'contact' => 'Para cualquier consulta sobre tus datos podés escribir a :contact.',
+        'contact' => 'Para cualquier consulta sobre tus datos puedes escribir a :contact.',
     ],
 
     'privacy' => [
@@ -24,7 +24,7 @@ return [
         'sections' => [
             [
                 'h' => 'Qué guardamos de tu cuenta',
-                'p' => 'Tu nombre, tu email y una versión cifrada (hash) de la contraseña, más la fecha en que verificaste el email. El email se usa para verificar la cuenta, recuperar el acceso y nada más: no mandamos newsletters. Si esta instancia tiene habilitado el inicio de sesión con Nexo ID y lo usás, guardamos además el identificador que ese servicio nos da para reconocerte.',
+                'p' => 'Tu nombre, tu email y una versión cifrada (hash) de la contraseña, más la fecha en que verificaste el email. El email se usa para verificar la cuenta, recuperar el acceso y nada más: no mandamos newsletters. Si esta instancia tiene habilitado el inicio de sesión con Nexo ID y lo usas, guardamos además el identificador que ese servicio nos da para reconocerte.',
             ],
             [
                 'h' => 'Tu página pública es pública',
@@ -43,8 +43,8 @@ return [
                 'p' => 'Solo las necesarias para que la web funcione: la de sesión y la de protección de formularios (que se emiten cuando entrás a tu cuenta), y dos que recuerdan tu preferencia de idioma y de tema claro/oscuro. Estas dos últimas viajan sin cifrar y con alcance al dominio padre a propósito, para que tu elección se respete en todas las herramientas Nexo; no llevan datos personales. Ninguna sirve para publicidad ni para seguimiento, y por eso no verás un banner de consentimiento.',
             ],
             [
-                'h' => 'Mientras tenés la sesión abierta',
-                'p' => 'El registro de sesión del servidor guarda tu IP y tu navegador mientras la sesión está viva, para poder cerrarla y detectar abusos. Se borra al cerrar sesión o al expirar. Esto pasa solo si tenés cuenta e iniciaste sesión: visitar una página pública no crea ninguna sesión.',
+                'h' => 'Mientras tienes la sesión abierta',
+                'p' => 'El registro de sesión del servidor guarda tu IP y tu navegador mientras la sesión está viva, para poder cerrarla y detectar abusos. Se borra al cerrar sesión o al expirar. Esto pasa solo si tienes cuenta e iniciaste sesión: visitar una página pública no crea ninguna sesión.',
             ],
             [
                 'h' => 'Reportes',
@@ -64,7 +64,7 @@ return [
             ],
             [
                 'h' => 'Tus derechos',
-                'p' => 'Podés ver y editar tus datos desde tu propio panel, y borrarlos por completo borrando la cuenta. Para pedir acceso, corrección o borrado por otra vía, escribí a quien opera esta instancia con el contacto que aparece al pie de esta página.',
+                'p' => 'Puedes ver y editar tus datos desde tu propio panel, y borrarlos por completo borrando la cuenta. Para pedir acceso, corrección o borrado por otra vía, escribe a quien opera esta instancia con el contacto que aparece al pie de esta página.',
             ],
             [
                 'h' => 'Otras instancias',
@@ -103,7 +103,7 @@ return [
             ],
             [
                 'h' => 'Software libre',
-                'p' => 'Nexo Links se distribuye con licencia MIT: podés leer el código, modificarlo y alojar tu propia instancia. El software se entrega sin garantías, según indica esa licencia.',
+                'p' => 'Nexo Links se distribuye con licencia MIT: puedes leer el código, modificarlo y alojar tu propia instancia. El software se entrega sin garantías, según indica esa licencia.',
             ],
             [
                 'h' => 'Cambios',

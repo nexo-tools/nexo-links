@@ -42,6 +42,37 @@ export default {
                     DEFAULT: 'var(--nexo-primary)',
                     hover: 'var(--nexo-primary-hover)',
                     fg: 'var(--nexo-primary-fg)',
+                    subtle: 'var(--nexo-primary-subtle)',
+                    'subtle-fg': 'var(--nexo-primary-subtle-fg)',
+                },
+                ring: 'var(--nexo-ring)',
+                link: {
+                    DEFAULT: 'var(--nexo-link)',
+                    hover: 'var(--nexo-link-hover)',
+                },
+                success: {
+                    DEFAULT: 'var(--nexo-success)',
+                    fg: 'var(--nexo-success-fg)',
+                    subtle: 'var(--nexo-success-subtle)',
+                    'subtle-fg': 'var(--nexo-success-subtle-fg)',
+                },
+                warning: {
+                    DEFAULT: 'var(--nexo-warning)',
+                    fg: 'var(--nexo-warning-fg)',
+                    subtle: 'var(--nexo-warning-subtle)',
+                    'subtle-fg': 'var(--nexo-warning-subtle-fg)',
+                },
+                danger: {
+                    DEFAULT: 'var(--nexo-danger)',
+                    fg: 'var(--nexo-danger-fg)',
+                    subtle: 'var(--nexo-danger-subtle)',
+                    'subtle-fg': 'var(--nexo-danger-subtle-fg)',
+                },
+                info: {
+                    DEFAULT: 'var(--nexo-info)',
+                    fg: 'var(--nexo-info-fg)',
+                    subtle: 'var(--nexo-info-subtle)',
+                    'subtle-fg': 'var(--nexo-info-subtle-fg)',
                 },
                 bg: {
                     DEFAULT: 'var(--nexo-bg)',
@@ -59,6 +90,9 @@ export default {
                     DEFAULT: 'var(--nexo-border)',
                     strong: 'var(--nexo-border-strong)',
                 },
+                // Separate from `line`: a control's own outline has to clear
+                // WCAG 1.4.11 (3:1), which the decorative border does not.
+                control: 'var(--nexo-border-control)',
             },
         },
     },

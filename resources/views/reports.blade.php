@@ -9,7 +9,7 @@
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 space-y-4">
 
             @if (session('status') === 'report-resolved')
-                <p class="text-sm text-green-600">{{ __('Report marked as resolved.') }}</p>
+                <p class="nexo-flash" role="status">{{ __('Report marked as resolved.') }}</p>
             @endif
 
             @if ($reports->isEmpty())
@@ -24,9 +24,9 @@
                                 <p class="font-medium text-ink">
                                     {{ __($reasons[$report->reason] ?? $report->reason) }}
                                     @if ($report->status === 'resolved')
-                                        <span class="ms-1 rounded bg-green-50 px-1.5 py-0.5 text-xs text-green-700">{{ __('Resolved') }}</span>
+                                        <span class="ms-1 rounded bg-success-subtle px-1.5 py-0.5 text-xs text-success-subtle-fg">{{ __('Resolved') }}</span>
                                     @else
-                                        <span class="ms-1 rounded bg-amber-50 px-1.5 py-0.5 text-xs text-amber-700">{{ __('Open') }}</span>
+                                        <span class="ms-1 rounded bg-warning-subtle px-1.5 py-0.5 text-xs text-warning-subtle-fg">{{ __('Open') }}</span>
                                     @endif
                                 </p>
                                 <p class="mt-1 text-sm text-muted">

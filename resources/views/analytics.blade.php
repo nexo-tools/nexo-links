@@ -14,7 +14,7 @@
                     <a href="{{ route('analytics', ['range' => $range]) }}"
                        @class([
                            'rounded-full px-3 py-1 text-sm transition',
-                           'bg-indigo-600 text-white' => $days === $range,
+                           'bg-primary text-primary-fg' => $days === $range,
                            'bg-surface text-muted hover:bg-bg-subtle shadow-sm' => $days !== $range,
                        ])>
                         {{ __(':days days', ['days' => $range]) }}
@@ -38,15 +38,21 @@
             <div class="bg-surface shadow-sm sm:rounded-lg p-6">
                 <h3 class="font-medium text-ink">{{ __('Clicks per day') }}</h3>
 
-                <div class="mt-4 flex h-32 items-end gap-0.5 border-b border-line" role="img" aria-label="{{ __('Clicks per day, last :days days', ['days' => $days]) }}">
+                {{-- role="group", not role="img": img makes the children
+                     presentational, which would hide the per-bar buttons. --}}
+                <div class="mt-4 flex h-32 items-end gap-0.5 border-b border-line" role="group" aria-label="{{ __('Clicks per day, last :days days', ['days' => $days]) }}">
                     @foreach ($series as $point)
-                        <div class="group relative flex-1">
-                            <span class="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 hidden -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white group-hover:block">
+                        {{-- Focusable, not hover-only: on touch and by keyboard a
+                             hover tooltip is the only copy of the number. --}}
+                        <button type="button"
+                                class="group relative flex-1 cursor-default rounded-t focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                                aria-label="{{ $point['day'] }} · {{ trans_choice(':count click|:count clicks', $point['total']) }}">
+                            <span class="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 hidden -translate-x-1/2 whitespace-nowrap rounded bg-ink px-2 py-1 text-xs text-bg group-hover:block group-focus-visible:block">
                                 {{ $point['day'] }} · {{ trans_choice(':count click|:count clicks', $point['total']) }}
                             </span>
-                            <div class="w-full rounded-t bg-indigo-500 transition group-hover:bg-indigo-600"
-                                 @style(['height: '.($point['total'] > 0 ? max(4, round($point['total'] / $maxPerDay * 120)) : 0).'px'])></div>
-                        </div>
+                            <span class="block w-full rounded-t bg-primary transition group-hover:bg-primary-hover motion-reduce:transition-none"
+                                  @style(['height: '.($point['total'] > 0 ? max(4, round($point['total'] / $maxPerDay * 120)) : 0).'px'])></span>
+                        </button>
                     @endforeach
                 </div>
 
