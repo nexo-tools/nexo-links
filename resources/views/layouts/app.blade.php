@@ -50,7 +50,7 @@
                         <x-dropdown-link :href="route('help')">{{ __('nexo.help.title') }}</x-dropdown-link>
                         <form method="POST" action="{{ config('nexo-sso.enabled') ? route('nexo-sso.logout') : route('logout') }}">
                             @csrf
-                            <x-dropdown-link>{{ __('Log Out') }}</x-dropdown-link>
+                            <x-dropdown-link>{{ __('Sign out') }}</x-dropdown-link>
                         </form>
                     </x-slot>
                 </x-dropdown>

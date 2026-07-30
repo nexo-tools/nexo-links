@@ -1,4 +1,4 @@
-<x-guest-layout :title="__('Log in')">
+<x-guest-layout :title="__('Sign in to your account')">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -40,7 +40,7 @@
             @endif
 
             <x-primary-button class="ms-3">
-                {{ __('Log in') }}
+                {{ __('Sign in') }}
             </x-primary-button>
         </div>
     </form>

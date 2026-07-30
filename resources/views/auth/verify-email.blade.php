@@ -24,7 +24,7 @@
             @csrf
 
             <button type="submit" class="underline text-sm text-muted hover:text-ink rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring">
-                {{ __('Log Out') }}
+                {{ __('Sign out') }}
             </button>
         </form>
     </div>

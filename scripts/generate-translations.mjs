@@ -88,8 +88,9 @@ const nexo = {
         'Link updated.': 'Link actualizado.',
         'Links': 'Links',
         'Links with superpowers': 'Links con superpoderes',
-        'Log Out': 'Cerrar sesión',
-        'Log in': 'Iniciar sesión',
+        'Sign in': 'Iniciar sesión',
+        'Sign in to your account': 'Inicia sesión en tu cuenta',
+        'Sign out': 'Cerrar sesión',
         'MIT licensed, self-hostable on cheap shared hosting (PHP + MySQL). Read the code, run your own, contribute.':
             'Licencia MIT, autoalojable en hosting compartido económico (PHP + MySQL). Lee el código, corre el tuyo, contribuye.',
         'No external referrers yet — clicks from your page or shared links without a referrer count as direct.':
@@ -322,8 +323,9 @@ const nexo = {
         'Link updated.': 'Link atualizado.',
         'Links': 'Links',
         'Links with superpowers': 'Links com superpoderes',
-        'Log Out': 'Sair',
-        'Log in': 'Entrar',
+        'Sign in': 'Entrar',
+        'Sign in to your account': 'Entre na sua conta',
+        'Sign out': 'Sair',
         'MIT licensed, self-hostable on cheap shared hosting (PHP + MySQL). Read the code, run your own, contribute.':
             'Licença MIT, auto-hospedável em hospedagem compartilhada barata (PHP + MySQL). Leia o código, rode o seu, contribua.',
         'No external referrers yet — clicks from your page or shared links without a referrer count as direct.':
