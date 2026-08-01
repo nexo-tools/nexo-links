@@ -20,7 +20,9 @@ it('generated translation files stay in sync with source strings', function () {
 
 it('ships the three ecosystem locales, with pt as the canonical Portuguese code', function () {
     // `pt_BR` is the laravel-lang source, never the code the app exposes.
-    expect(array_keys(config('nexo.locales')))->toBe(['en', 'es', 'pt']);
+    // Order matters: the first locale is what a client with no Accept-Language
+    // gets (bots, crawlers, curl) — Spanish-first, like the rest of the family.
+    expect(array_keys(config('nexo.locales')))->toBe(['es', 'en', 'pt']);
 
     foreach (['es', 'pt'] as $locale) {
         expect(is_file(lang_path("{$locale}.json")))->toBeTrue("lang/{$locale}.json is missing.");
