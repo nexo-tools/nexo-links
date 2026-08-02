@@ -255,6 +255,36 @@ const nexo = {
         'Platform': 'Plataforma',
         'Country code': 'Código de país',
         'Phone number': 'Número de teléfono',
+
+        // Landing (design.md skeleton). The h1 is the tool's tagline from
+        // config/nexo-ecosystem.php, character for character — nexo-doctor
+        // checks the equality, so this line is not free to be improved.
+        'Share all your links in one place.': 'Comparte todos tus links en un solo lugar.',
+        '1 — Add your links': '1 — Agrega tus links',
+        '2 — Share your page': '2 — Comparte tu página',
+        '3 — Read your numbers, cookie-free': '3 — Mira tus números, sin cookies',
+        'How it works': 'Cómo funciona',
+        'The numbers': 'Los datos',
+        'Frequent questions': 'Preguntas frecuentes',
+        'All questions': 'Todas las preguntas',
+        // Spec sheet: every row is a limit the code enforces, and the view names
+        // the source next to it.
+        'Public username': 'Usuario público',
+        '3–30 characters; lowercase, digits, - and _; :count reserved':
+            '3–30 caracteres; minúsculas, dígitos, - y _; :count reservados',
+        'Link title and URL': 'Título y URL del link',
+        'Title up to 120 · URL up to 2048, http/https/mailto/tel':
+            'Título hasta 120 · URL hasta 2048, http/https/mailto/tel',
+        'Visitor metric': 'Métrica de visitas',
+        'Daily-rotating SHA-256 hash — no IP or cookie stored':
+            'Hash SHA-256 rotado a diario — ni IP ni cookies almacenadas',
+        'Analytics ranges': 'Rangos de estadísticas',
+        '7 · 30 · 90 days': '7 · 30 · 90 días',
+        'Link scheduling': 'Programación de links',
+        'Optional start and end, countdown computed on the fly':
+            'Inicio y fin opcionales, countdown calculado al momento',
+        'Languages and themes': 'Idiomas y temas',
+        'es · en · pt — light and dark': 'es · en · pt — claro y oscuro',
     },
     pt: {
         'An account with this email already exists. Verify your email on Nexo ID first.':
@@ -490,6 +520,32 @@ const nexo = {
         'Platform': 'Plataforma',
         'Country code': 'Código do país',
         'Phone number': 'Número de telefone',
+
+        // Landing (design.md skeleton) — see the es block above.
+        'Share all your links in one place.': 'Compartilhe todos os seus links em um só lugar.',
+        '1 — Add your links': '1 — Adicione seus links',
+        '2 — Share your page': '2 — Compartilhe sua página',
+        '3 — Read your numbers, cookie-free': '3 — Veja seus números, sem cookies',
+        'How it works': 'Como funciona',
+        'The numbers': 'Os dados',
+        'Frequent questions': 'Perguntas frequentes',
+        'All questions': 'Todas as perguntas',
+        'Public username': 'Usuário público',
+        '3–30 characters; lowercase, digits, - and _; :count reserved':
+            '3–30 caracteres; minúsculas, dígitos, - e _; :count reservados',
+        'Link title and URL': 'Título e URL do link',
+        'Title up to 120 · URL up to 2048, http/https/mailto/tel':
+            'Título até 120 · URL até 2048, http/https/mailto/tel',
+        'Visitor metric': 'Métrica de visitas',
+        'Daily-rotating SHA-256 hash — no IP or cookie stored':
+            'Hash SHA-256 rotacionado diariamente — nem IP nem cookies armazenados',
+        'Analytics ranges': 'Períodos das estatísticas',
+        '7 · 30 · 90 days': '7 · 30 · 90 dias',
+        'Link scheduling': 'Agendamento de links',
+        'Optional start and end, countdown computed on the fly':
+            'Início e fim opcionais, contagem regressiva calculada na hora',
+        'Languages and themes': 'Idiomas e temas',
+        'es · en · pt — light and dark': 'es · en · pt — claro e escuro',
     },
 };
 
