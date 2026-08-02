@@ -256,4 +256,9 @@ return [
         'www',
     ],
 
+    // Sign-in attempts per IP per minute. Complements the per-credential
+    // lockout in LoginRequest, which is blind to one IP trying many accounts.
+    'login_rate' => [
+        'per_ip' => env('NEXO_LOGIN_RATE_PER_IP', 20),
+    ],
 ];
