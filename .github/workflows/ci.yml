@@ -4,71 +4,52 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
 
 jobs:
-  quality:
-    name: Lint & static analysis
+  checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
+          php-version: '8.5'
+          extensions: mbstring, intl, pdo_sqlite
           coverage: none
 
-      - name: Install Composer dependencies
-        uses: ramsey/composer-install@v3
+      - uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
 
-      - name: Check code style (Pint)
-        run: vendor/bin/pint --test
+      - run: composer install --prefer-dist --no-progress --no-interaction
 
-      - name: Static analysis (Larastan)
-        run: vendor/bin/phpstan analyse --no-progress --memory-limit=1G
-
-      - name: Security audit (dependencies)
+      - name: Composer audit (dependency vulnerabilities)
         run: |
           for i in 1 2 3; do composer audit && exit 0; echo "composer audit attempt $i failed (likely transient network), retrying in 5s"; sleep 5; done
           composer audit
 
-  tests:
-    name: Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+      - name: Pint (code style)
+        run: vendor/bin/pint --test
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          coverage: none
+      - name: Larastan (static analysis)
+        run: vendor/bin/phpstan analyse --no-progress
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: 22
           cache: npm
 
-      - name: Install Composer dependencies
-        uses: ramsey/composer-install@v3
+      - run: npm ci
 
-      # Fails if a __() string has no es/pt translation, or if a lang file was
-      # hand-edited / the generator was never re-run. Needs vendor/ (laravel-lang
-      # is the source of the framework strings), hence the position.
       - name: Translations (check in sync)
         run: node scripts/generate-translations.mjs --check
 
-      - name: Build frontend assets
-        run: |
-          npm ci
-          npm run build
+      - name: Build assets
+        run: npm run build
 
-      - name: Prepare environment
+      - name: Pest (tests)
         run: |
           cp .env.example .env
           php artisan key:generate
-
-      - name: Run tests (Pest)
-        run: php artisan test
+          vendor/bin/pest
