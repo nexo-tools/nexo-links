@@ -1,0 +1,90 @@
+{
+  "_comment": "Screenshot manifest for `node ~/alvaro/scripts/nexo-shots.mjs .`. Underscore-prefixed keys are comments (JSON has none) — the script ignores them.",
+  "_rules": "LOCAL instance only, seeded with DemoSeeder (design.md, Family): `docker compose up -d` then `artisan migrate:fresh --seed --seeder=DemoSeeder`. Never production — these figures are the landing's proof, and the proof cannot be somebody's real page.",
+  "baseUrl": "http://localhost:8090",
+  "_login": "The DemoSeeder user. The script signs in through the real form, so nothing capture-only has to exist in the app.",
+  "login": {
+    "path": "/login",
+    "email": "demo@example.com",
+    "password": "password"
+  },
+  "shots": [
+    {
+      "_comment": "producto step 1 — the dashboard: the add-link button and the list of links in their real states. The create form is collapsed by default (Alpine) and the script does not click, which is correct: the figure is the list, not an empty form.",
+      "name": "crear",
+      "path": "/dashboard",
+      "viewport": { "width": 1280, "height": 800 },
+      "themes": ["light", "dark"],
+      "out": "public/landing/shot-1",
+      "fullPage": false,
+      "auth": true
+    },
+    {
+      "_comment": "producto step 1, on the phone.",
+      "name": "crear-mobile",
+      "path": "/dashboard",
+      "viewport": { "width": 390, "height": 844 },
+      "themes": ["light", "dark"],
+      "out": "public/landing/shot-1-mobile",
+      "fullPage": false,
+      "auth": true
+    },
+    {
+      "_comment": "producto step 2 — the public page a visitor sees. It renders in the OWNER's theme, not the visitor's (DarkModeCoverageTest requires it), so light and dark come out nearly identical here. That is correct, not a bug.",
+      "name": "pagina",
+      "path": "/demo",
+      "viewport": { "width": 1280, "height": 800 },
+      "themes": ["light", "dark"],
+      "out": "public/landing/shot-2",
+      "fullPage": false
+    },
+    {
+      "_comment": "producto step 2, on the phone — which is where a link-in-bio page is actually opened.",
+      "name": "pagina-mobile",
+      "path": "/demo",
+      "viewport": { "width": 390, "height": 844 },
+      "themes": ["light", "dark"],
+      "out": "public/landing/shot-2-mobile",
+      "fullPage": false
+    },
+    {
+      "_comment": "producto step 3 — clicks per day, unique visitors and top referrers over the seeded fortnight.",
+      "name": "stats",
+      "path": "/analytics",
+      "viewport": { "width": 1280, "height": 800 },
+      "themes": ["light", "dark"],
+      "out": "public/landing/shot-3",
+      "fullPage": false,
+      "auth": true
+    },
+    {
+      "_comment": "producto step 3, on the phone.",
+      "name": "stats-mobile",
+      "path": "/analytics",
+      "viewport": { "width": 390, "height": 844 },
+      "themes": ["light", "dark"],
+      "out": "public/landing/shot-3-mobile",
+      "fullPage": false,
+      "auth": true
+    },
+    {
+      "_comment": "Mobile-first: the gate's evidence is the landing at 375px, light and dark (STANDARD.md).",
+      "name": "landing-mobile",
+      "path": "/",
+      "viewport": { "width": 375, "height": 812 },
+      "themes": ["light", "dark"],
+      "out": "public/landing/shot-mobile",
+      "fullPage": false
+    },
+    {
+      "_comment": "The README's home shot (public-readme requires docs/screenshots/home-{light,dark}.png): PNG, fullPage.",
+      "name": "home",
+      "path": "/",
+      "viewport": { "width": 1280, "height": 800 },
+      "themes": ["light", "dark"],
+      "out": "docs/screenshots/home",
+      "fullPage": true,
+      "format": "png"
+    }
+  ]
+}
