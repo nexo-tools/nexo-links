@@ -55,4 +55,17 @@ class SocialLink extends Model
     {
         return config('nexo.social_platforms.'.$this->platform.'.label', $this->platform);
     }
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        // Link::position casts to int and this one did not, so the same field
+        // came back as a string here and as a number there — the kind of
+        // asymmetry that turns into a === comparison bug months later.
+        return [
+            'position' => 'integer',
+        ];
+    }
 }
