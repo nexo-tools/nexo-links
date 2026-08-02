@@ -1,6 +1,7 @@
 {
   "_comment": "Screenshot manifest for `node ~/alvaro/scripts/nexo-shots.mjs .`. Underscore-prefixed keys are comments (JSON has none) — the script ignores them.",
   "_rules": "LOCAL instance only, seeded with DemoSeeder (design.md, Family): `docker compose up -d` then `artisan migrate:fresh --seed --seeder=DemoSeeder`. Never production — these figures are the landing's proof, and the proof cannot be somebody's real page.",
+  "_trap": "Run `artisan cache:clear` after any `npm run build` and before capturing. Public pages are cached rendered (Page::flushCache), asset URLs and all, so a cached page keeps pointing at the previous build's hashed CSS — which no longer exists. The figure then comes out unstyled, and it looks like a broken product rather than a stale cache.",
   "baseUrl": "http://localhost:8090",
   "_login": "The DemoSeeder user. The script signs in through the real form, so nothing capture-only has to exist in the app.",
   "login": {
