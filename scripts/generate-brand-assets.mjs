@@ -17,7 +17,10 @@ import { readFileSync, writeFileSync, copyFileSync } from 'node:fs';
 const CONFIG = {
   mark: 'resources/brand/mark.svg', // this tool's Nexo mark (copied from nexo-brand/marks)
   label: 'Nexo Links',              // wordmark shown on the OG card
-  tagline: 'Your links. Your domain. Your data.',
+  // The registry's tagline, verbatim: one claim per tool across every
+  // surface, og-image included (STANDARD.md, "El claim canónico vive en el
+  // registro"). Keep it in sync with config/nexo-ecosystem.php.
+  tagline: 'Comparte todos tus links en un solo lugar.',
   publicDir: 'public',
 };
 // Brand constants (do not edit — from the Nexo palette).
