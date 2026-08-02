@@ -24,10 +24,14 @@
 
     <x-nexo-header brand="{{ config('app.name') }}" mark="/ecosystem/nexolinks.svg" home="/">
         <x-slot:actions>
+            {{-- nexo-header__auth: at 375px the row (wordmark + three controls +
+                 a text button) overflowed the viewport by 29px, which is the one
+                 thing the standard calls non-negotiable. Same fix the landing
+                 header already carries — from sm up the button returns. --}}
             @auth
-                <a href="{{ route('dashboard') }}" class="nexo-btn nexo-btn--ghost">{{ __('Dashboard') }}</a>
+                <a href="{{ route('dashboard') }}" class="nexo-btn nexo-btn--ghost nexo-header__auth">{{ __('Dashboard') }}</a>
             @else
-                <a href="{{ route('register') }}" class="nexo-btn nexo-btn--primary">{{ __('Create your page') }}</a>
+                <a href="{{ route('register') }}" class="nexo-btn nexo-btn--primary nexo-header__auth">{{ __('Create your page') }}</a>
             @endauth
         </x-slot:actions>
     </x-nexo-header>
