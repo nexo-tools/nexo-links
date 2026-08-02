@@ -129,6 +129,16 @@ const nexo = {
         'Link deleted.': 'Link eliminado.',
         'Link updated.': 'Link actualizado.',
         'Links': 'Links',
+        // Canonical auth form (2026-08-02), pinned in tuteo: laravel-lang's
+        // base says "Mantener sesión activa", "¿Olvidó su contraseña?" and
+        // "¿Ya se registró?" — usted drift on a page that tutea everywhere else.
+        'Email': 'Correo electrónico',
+        'Password': 'Contraseña',
+        'Remember me': 'Recordarme',
+        'Forgot your password?': '¿Olvidaste tu contraseña?',
+        "Don't have an account?": '¿No tienes una cuenta?',
+        'Create account': 'Crear cuenta',
+        'Already registered?': '¿Ya tienes una cuenta?',
         'Sign in': 'Iniciar sesión',
         'Sign in to your account': 'Inicia sesión en tu cuenta',
         'Sign out': 'Cerrar sesión',
@@ -418,6 +428,14 @@ const nexo = {
         'Link deleted.': 'Link excluído.',
         'Link updated.': 'Link atualizado.',
         'Links': 'Links',
+        // Canonical auth form (2026-08-02) — see the es block above.
+        'Email': 'E-mail',
+        'Password': 'Senha',
+        'Remember me': 'Lembrar de mim',
+        'Forgot your password?': 'Esqueceu sua senha?',
+        "Don't have an account?": 'Não tem uma conta?',
+        'Create account': 'Criar conta',
+        'Already registered?': 'Já tem uma conta?',
         'Sign in': 'Entrar',
         'Sign in to your account': 'Entre na sua conta',
         'Sign out': 'Sair',

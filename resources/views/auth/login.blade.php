@@ -32,18 +32,18 @@
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-muted hover:text-ink rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Sign in') }}
-            </x-primary-button>
-        </div>
+        <x-primary-button class="mt-4 w-full">
+            {{ __('Sign in') }}
+        </x-primary-button>
     </form>
+
+    @if (Route::has('password.request'))
+        <div class="mt-4 text-center">
+            <a class="underline text-sm text-muted hover:text-ink rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring" href="{{ route('password.request') }}">
+                {{ __('Forgot your password?') }}
+            </a>
+        </div>
+    @endif
 
     @if (config('nexo-sso.enabled'))
         <div class="mt-6">
@@ -55,10 +55,18 @@
 
             <x-input-error :messages="$errors->get('nexo_sso')" class="mt-4" />
 
-            <a href="{{ route('nexo-sso.redirect') }}"
-               class="mt-4 inline-flex w-full items-center justify-center rounded-md border border-line bg-surface px-4 py-2 text-sm font-medium text-ink shadow-sm hover:bg-surface-sunken focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-500">
+            <a href="{{ route('nexo-sso.redirect') }}" class="mt-4 nexo-btn nexo-btn--ghost w-full">
                 {{ __('Continue with Nexo ID') }}
             </a>
         </div>
+    @endif
+
+    @if (Route::has('register'))
+        <p class="mt-6 text-center text-sm text-muted">
+            {{ __("Don't have an account?") }}
+            <a class="underline hover:text-ink rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring" href="{{ route('register') }}">
+                {{ __('Create account') }}
+            </a>
+        </p>
     @endif
 </x-guest-layout>

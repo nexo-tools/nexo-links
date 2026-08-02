@@ -31,9 +31,6 @@
          a second solid violet button a few pixels away, with a different verb,
          was competing with the one that answers the claim. --}}
     <x-nexo-header brand="Nexo Links" mark="/ecosystem/nexolinks.svg" :home="url('/')">
-        <x-slot:nav>
-            <a href="{{ route('help') }}" class="nexo-btn nexo-btn--ghost">{{ __('nexo.help.title') }}</a>
-        </x-slot:nav>
         <x-slot:actions>
             @auth
                 <a href="{{ route('dashboard') }}" class="nexo-btn nexo-btn--ghost">{{ __('Dashboard') }}</a>
