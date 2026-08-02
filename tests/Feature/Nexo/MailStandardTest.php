@@ -23,6 +23,7 @@
 
 use App\Mail\EmailChanged;
 use App\Mail\NexoIdLinked;
+use App\Mail\OperatorAlert;
 use App\Mail\PageReported;
 use App\Mail\PasswordChanged;
 use App\Models\Page;
@@ -44,6 +45,9 @@ use Illuminate\Mail\Mailable;
 function nexoMails(): array
 {
     return [
+        // The operator alert renders like any other mail: it is here because the
+        // one mail nobody declared was the one that shipped broken.
+        'operator-alert' => fn () => OperatorAlert::fromThrowable(new RuntimeException('something broke'), 'https://example.test/x'),
         'verify-email' => fn () => [new VerifyEmailQueued, User::factory()->unverified()->create()],
         'reset-password' => fn () => [new ResetPasswordQueued('raw-reset-token'), User::factory()->create()],
         'password-changed' => fn () => new PasswordChanged(User::factory()->create()),
@@ -62,7 +66,8 @@ function nexoMails(): array
  */
 function nexoOperatorMails(): array
 {
-    return [];
+    // Goes to whoever runs the instance, not to a user.
+    return ['operator-alert'];
 }
 
 /**
