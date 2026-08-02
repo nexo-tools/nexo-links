@@ -40,18 +40,13 @@ const nexo = {
         "An open-source link-in-bio page you host yourself — with visitor analytics that don't spy on anyone.":
             'Una página link-in-bio de código abierto que alojas tú mismo — con estadísticas de visitas que no espían a nadie.',
         'Analytics': 'Estadísticas',
-        'Analytics without spying': 'Estadísticas sin espiar',
         'Are you sure you want to delete your account?': '¿Seguro que quieres borrar tu cuenta?',
         'Avatar': 'Avatar',
-        'Avatar, banner, color palettes, solid or gradient backgrounds — with automatic dark mode and readable text guaranteed.':
-            'Avatar, banner, paletas de colores, fondos sólidos o degradados — con modo oscuro automático y texto legible garantizado.',
         'Back to home': 'Volver al inicio',
         'Background': 'Fondo',
         'Banner': 'Portada',
         'Bio': 'Bio',
         'Build a WhatsApp link': 'Armar un link de WhatsApp',
-        'Click stats with zero cookies and zero personal data stored. No consent banner needed — private by design.':
-            'Estadísticas de clics sin cookies y sin guardar datos personales. Sin banner de consentimiento — privado por diseño.',
         'Clicks': 'Clics',
         'Clicks per day': 'Clics por día',
         'Clicks per day, last :days days': 'Clics por día, últimos :days días',
@@ -59,7 +54,6 @@ const nexo = {
         'Copied!': '¡Copiado!',
         'Copy URL': 'Copiar URL',
         'Create your page': 'Crea tu página',
-        "Create your page — it's free": 'Crea tu página — es gratis',
         'Create yours': 'Crea la tuya',
         'Dashboard': 'Panel',
         'Default': 'Por defecto',
@@ -73,8 +67,6 @@ const nexo = {
         'Edit': 'Editar',
         'Ends at (optional)': 'Termina el (opcional)',
         'Expired': 'Vencido',
-        'Fast and lightweight': 'Rápido y liviano',
-        'Features': 'Características',
         'For security reasons, reload the page and try again.':
             'Por seguridad, recarga la página e inténtalo de nuevo.',
         'Gradient': 'Degradado',
@@ -87,24 +79,17 @@ const nexo = {
         'Link deleted.': 'Link eliminado.',
         'Link updated.': 'Link actualizado.',
         'Links': 'Links',
-        'Links with superpowers': 'Links con superpoderes',
         'Sign in': 'Iniciar sesión',
         'Sign in to your account': 'Inicia sesión en tu cuenta',
         'Sign out': 'Cerrar sesión',
-        'MIT licensed, self-hostable on cheap shared hosting (PHP + MySQL). Read the code, run your own, contribute.':
-            'Licencia MIT, autoalojable en hosting compartido económico (PHP + MySQL). Lee el código, corre el tuyo, contribuye.',
         'No external referrers yet — clicks from your page or shared links without a referrer count as direct.':
             'Aún no hay referentes externos — los clics desde tu página o desde links compartidos sin referente cuentan como directos.',
         'No links yet.': 'Aún no hay links.',
         'No links yet. Add your first one!': 'Aún no hay links. ¡Agrega el primero!',
-        'No vendor lock-in': 'Sin ataduras a plataformas',
         'Nothing here yet.': 'Todavía no hay nada aquí.',
         'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.':
             'Cuando borres tu cuenta, todos sus recursos y datos se eliminarán de forma permanente. Escribe tu contraseña para confirmar que quieres borrar la cuenta definitivamente.',
-        'Open source': 'Código abierto',
         'Open source on GitHub': 'Código abierto en GitHub',
-        "Open-source link-in-bio page you host yourself, with visitor analytics that don't spy on anyone.":
-            'Página link-in-bio de código abierto que alojas tú mismo, con estadísticas de visitas que no espían a nadie.',
         'Page not found': 'Página no encontrada',
         'Per link': 'Por link',
         'Prefilled message (optional)': 'Mensaje precargado (opcional)',
@@ -116,12 +101,8 @@ const nexo = {
         'Remove avatar': 'Quitar avatar',
         'Remove banner': 'Quitar banner',
         'Save': 'Guardar',
-        'Schedule links by date, highlight what\'s live right now, and tease launches with a countdown.':
-            'Programa links por fecha, destaca lo que está en vivo ahora y anticipa lanzamientos con una cuenta regresiva.',
         'Scheduled': 'Programado',
         'See a live example': 'Ver un ejemplo en vivo',
-        "Server-rendered pages with no trackers and no external requests. Built mobile-first, because that's where your visitors are.":
-            'Páginas renderizadas en el servidor, sin rastreadores ni peticiones externas. Diseñado primero para el celular, porque ahí están tus visitas.',
         'Share your page': 'Comparte tu página',
         'Show': 'Mostrar',
         'Show countdown before it starts': 'Mostrar cuenta regresiva antes de que empiece',
@@ -169,14 +150,7 @@ const nexo = {
         'You do not have permission to see this page.': 'No tienes permiso para ver esta página.',
         'You went a little too fast. Wait a moment and try again.':
             'Fuiste un poco demasiado rápido. Espera un momento e inténtalo de nuevo.',
-        'Your data.': 'Tus datos.',
-        'Your domain.': 'Tu dominio.',
         'Your handle, email or URL': 'Tu usuario, email o URL',
-        'Your links.': 'Tus links.',
-        'Your links. Your domain. Your data.': 'Tus links. Tu dominio. Tus datos.',
-        'Your look': 'Tu estilo',
-        'Your page lives on your own domain and server. No platform can paywall it, break your URL or shut it down.':
-            'Tu página vive en tu propio dominio y servidor. Ninguna plataforma puede cobrarte por ella, romper tu URL ni cerrarla.',
         'starts in': 'empieza en',
         'Language': 'Idioma',
         'Help': 'Ayuda',
@@ -306,18 +280,13 @@ const nexo = {
         "An open-source link-in-bio page you host yourself — with visitor analytics that don't spy on anyone.":
             'Uma página link-in-bio de código aberto que você mesmo hospeda — com estatísticas de visitantes que não espionam ninguém.',
         'Analytics': 'Estatísticas',
-        'Analytics without spying': 'Estatísticas sem espionar',
         'Are you sure you want to delete your account?': 'Tem certeza de que quer excluir a sua conta?',
         'Avatar': 'Avatar',
-        'Avatar, banner, color palettes, solid or gradient backgrounds — with automatic dark mode and readable text guaranteed.':
-            'Avatar, banner, paletas de cores, fundos sólidos ou degradês — com modo escuro automático e texto legível garantido.',
         'Back to home': 'Voltar ao início',
         'Background': 'Fundo',
         'Banner': 'Capa',
         'Bio': 'Bio',
         'Build a WhatsApp link': 'Criar um link de WhatsApp',
-        'Click stats with zero cookies and zero personal data stored. No consent banner needed — private by design.':
-            'Estatísticas de cliques sem cookies e sem armazenar dados pessoais. Sem banner de consentimento — privado por padrão.',
         'Clicks': 'Cliques',
         'Clicks per day': 'Cliques por dia',
         'Clicks per day, last :days days': 'Cliques por dia, últimos :days dias',
@@ -325,7 +294,6 @@ const nexo = {
         'Copied!': 'Copiado!',
         'Copy URL': 'Copiar URL',
         'Create your page': 'Crie sua página',
-        "Create your page — it's free": 'Crie sua página — é grátis',
         'Create yours': 'Crie a sua',
         'Dashboard': 'Painel',
         'Default': 'Padrão',
@@ -339,8 +307,6 @@ const nexo = {
         'Edit': 'Editar',
         'Ends at (optional)': 'Termina em (opcional)',
         'Expired': 'Expirado',
-        'Fast and lightweight': 'Rápido e leve',
-        'Features': 'Recursos',
         'For security reasons, reload the page and try again.': 'Por segurança, recarregue a página e tente novamente.',
         'Gradient': 'Degradê',
         'Hidden': 'Oculto',
@@ -352,24 +318,17 @@ const nexo = {
         'Link deleted.': 'Link excluído.',
         'Link updated.': 'Link atualizado.',
         'Links': 'Links',
-        'Links with superpowers': 'Links com superpoderes',
         'Sign in': 'Entrar',
         'Sign in to your account': 'Entre na sua conta',
         'Sign out': 'Sair',
-        'MIT licensed, self-hostable on cheap shared hosting (PHP + MySQL). Read the code, run your own, contribute.':
-            'Licença MIT, auto-hospedável em hospedagem compartilhada barata (PHP + MySQL). Leia o código, rode o seu, contribua.',
         'No external referrers yet — clicks from your page or shared links without a referrer count as direct.':
             'Ainda não há referências externas — cliques da sua página ou de links compartilhados sem referência contam como diretos.',
         'No links yet.': 'Ainda não há links.',
         'No links yet. Add your first one!': 'Ainda não há links. Adicione o primeiro!',
-        'No vendor lock-in': 'Sem dependência de plataformas',
         'Nothing here yet.': 'Ainda não há nada aqui.',
         'Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.':
             'Depois que a sua conta for excluída, todos os seus recursos e dados serão apagados permanentemente. Digite a sua senha para confirmar que quer excluir a conta definitivamente.',
-        'Open source': 'Código aberto',
         'Open source on GitHub': 'Código aberto no GitHub',
-        "Open-source link-in-bio page you host yourself, with visitor analytics that don't spy on anyone.":
-            'Página link-in-bio de código aberto que você mesmo hospeda, com estatísticas de visitantes que não espionam ninguém.',
         'Page not found': 'Página não encontrada',
         'Per link': 'Por link',
         'Prefilled message (optional)': 'Mensagem pré-preenchida (opcional)',
@@ -381,12 +340,8 @@ const nexo = {
         'Remove avatar': 'Remover avatar',
         'Remove banner': 'Remover banner',
         'Save': 'Salvar',
-        'Schedule links by date, highlight what\'s live right now, and tease launches with a countdown.':
-            'Agende links por data, destaque o que está ao vivo agora e antecipe lançamentos com uma contagem regressiva.',
         'Scheduled': 'Agendado',
         'See a live example': 'Veja um exemplo ao vivo',
-        "Server-rendered pages with no trackers and no external requests. Built mobile-first, because that's where your visitors are.":
-            'Páginas renderizadas no servidor, sem rastreadores nem requisições externas. Feito primeiro para o celular, porque é lá que estão suas visitas.',
         'Share your page': 'Compartilhe sua página',
         'Show': 'Mostrar',
         'Show countdown before it starts': 'Mostrar contagem regressiva antes de começar',
@@ -434,14 +389,7 @@ const nexo = {
         'You do not have permission to see this page.': 'Você não tem permissão para ver esta página.',
         'You went a little too fast. Wait a moment and try again.':
             'Você foi um pouco rápido demais. Espere um momento e tente novamente.',
-        'Your data.': 'Seus dados.',
-        'Your domain.': 'Seu domínio.',
         'Your handle, email or URL': 'Seu usuário, e-mail ou URL',
-        'Your links.': 'Seus links.',
-        'Your links. Your domain. Your data.': 'Seus links. Seu domínio. Seus dados.',
-        'Your look': 'Seu estilo',
-        'Your page lives on your own domain and server. No platform can paywall it, break your URL or shut it down.':
-            'Sua página vive no seu próprio domínio e servidor. Nenhuma plataforma pode cobrar por ela, quebrar sua URL nem encerrá-la.',
         'starts in': 'começa em',
         'Language': 'Idioma',
         'Help': 'Ajuda',

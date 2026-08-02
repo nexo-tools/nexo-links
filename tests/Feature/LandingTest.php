@@ -9,11 +9,22 @@ test('the landing page renders with CTAs for guests', function () {
     $response = $this->get('/');
 
     $response->assertOk()
-        ->assertSee('Your links.')
+        ->assertSee('Share all your links in one place.')
         ->assertSee(route('register'))
         ->assertSee(route('login'))
         ->assertSee('See a live example')
         ->assertSee(url('/'.config('nexo.example_username')));
+});
+
+test('the h1 in Spanish is the tagline from the registry', function () {
+    // One claim per tool across every surface (design.md, "Copy"): the landing's
+    // h1 is not a page-local headline, it is the registry's tagline. The suite
+    // runs in English, so the equality is checked on the translation map — which
+    // is also where nexo-doctor reads it.
+    $es = json_decode((string) file_get_contents(lang_path('es.json')), true);
+
+    expect($es['Share all your links in one place.'])
+        ->toBe(config('nexo-ecosystem.tools.nexolinks.tagline'));
 });
 
 test('the example button is hidden when the example page does not exist', function () {
