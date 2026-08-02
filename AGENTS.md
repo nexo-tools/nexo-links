@@ -88,6 +88,7 @@ cd ~/dev-environment && docker compose up -d mysql mailpit  # shared services fi
 
 ## Accumulated context
 
+- **2026-08-02** — **Ola de estandarización transversal.** Auth pasó al chrome de familia — era el único sin header, sin footer y **sin toggle de tema** en login. Los dos mails del framework son ahora clases propias encoladas con la plantilla de familia, más cuatro avisos nuevos: página denunciada (al dueño, sin identificar a quien denuncia), cambio de email (**a la dirección vieja**, que es la única que puede notar un robo de cuenta) con re-verificación automática de la nueva, contraseña cambiada y vínculo de Nexo ID. El POST de login tiene throttle de ruta (el lockout por credencial no ve una IP probando mil direcciones). 263 → 295 tests.
 - **2026-07-28** — **Nexo standard: static pages, guardians, i18n drift check.**
   (a) **Error pages**: `resources/views/components/error-layout.blade.php` +
   `errors/{403,404,419,429,500,503}.blade.php`, copied from the standards repo
