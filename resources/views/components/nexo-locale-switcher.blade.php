@@ -11,7 +11,7 @@
     $current = $current ?? app()->getLocale();
 @endphp
 
-<div class="nexo-menu" x-data="nexoMenu" @keydown="onKeydown($event)" @click.outside="close({ restoreFocus: false })">
+<div class="nexo-menu" data-nexo-locale-switcher x-data="nexoMenu" @keydown="onKeydown($event)" @click.outside="close({ restoreFocus: false })">
     <button
         type="button"
         class="nexo-btn nexo-btn--ghost"
