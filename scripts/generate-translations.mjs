@@ -48,7 +48,7 @@ const nexo = {
         'If it was not you, reset it right now — whoever did it is signed in:':
             'Si no fuiste tú, restablécela ahora mismo: quien la cambió está dentro de tu cuenta.',
         'If the button does not work, copy and paste this link:':
-            'Si el botón no funciona, copia y pega este link:',
+            'Si el botón no funciona, copia y pega este enlace:',
         'If you did not ask for this, you can ignore this email — your password stays the same.':
             'Si no lo pediste, puedes ignorar este correo: tu contraseña sigue igual.',
         'If you did not create an account, you can ignore this email.':
@@ -68,7 +68,7 @@ const nexo = {
         'You asked to reset your password.':
             'Pediste restablecer tu contraseña.',
         'You asked to reset your password. The link expires in :minutes minutes.':
-            'Pediste restablecer tu contraseña. El link vence en :minutes minutos.',
+            'Pediste restablecer tu contraseña. El enlace vence en :minutes minutos.',
         'Your password changed':
             'Tu contraseña cambió',
         'An account with this email already exists. Verify your email on Nexo ID first.':
