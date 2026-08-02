@@ -49,7 +49,8 @@ even on cheap shared hosting (PHP + MySQL).
 
 ## Screenshots
 
-Captured from the live instance.
+Captured from a local instance seeded with `DemoSeeder`, by
+`node ~/alvaro/scripts/nexo-shots.mjs .` — never from production.
 
 | Light | Dark |
 | --- | --- |
