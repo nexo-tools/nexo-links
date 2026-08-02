@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPasswordQueued;
+use App\Notifications\VerifyEmailQueued;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -37,5 +39,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function page(): HasOne
     {
         return $this->hasOne(Page::class);
+    }
+
+    /**
+     * Both auth mails go out queued, in this product's template, with the
+     * locale pinned at dispatch (family rules C2 and C3): the queue worker has
+     * no request to read a language from.
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify((new ResetPasswordQueued($token))->locale(app()->getLocale()));
+    }
+
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify((new VerifyEmailQueued)->locale(app()->getLocale()));
     }
 }

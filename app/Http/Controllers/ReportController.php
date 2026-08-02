@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PageReported;
 use App\Models\Link;
 use App\Models\Page;
 use App\Support\VisitorHash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -43,10 +45,16 @@ class ReportController extends Controller
             ]);
         }
 
-        $page->reports()->create([
+        $report = $page->reports()->create([
             ...$validated,
             'visitor_hash' => $visitorHash,
         ]);
+
+        // The owner hears it from us, not from an empty profile: a report used
+        // to sit in the database until they happened to open /reports.
+        Mail::to($page->user->email)
+            ->locale(config('app.locale'))
+            ->queue(new PageReported($page, (string) $report->reason));
 
         return redirect()
             ->route('report.create', $page->username)

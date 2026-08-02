@@ -113,9 +113,13 @@ MAIL_MAILER=smtp
 MAIL_HOST=smtp.hostinger.com
 MAIL_PORT=465
 MAIL_SCHEME=smtps
-MAIL_USERNAME=nexo@alvarocdev.com
+MAIL_USERNAME=nexolinks@alvarocdev.com
 MAIL_PASSWORD=********
-MAIL_FROM_ADDRESS=nexo@alvarocdev.com
+
+# Family sender convention (one address per tool, C1). No mailable sets its own
+# from, so this is the single place that decides who the mail comes from.
+MAIL_FROM_ADDRESS=nexolinks@alvarocdev.com
+MAIL_FROM_NAME="Nexo Links"
 
 NEXO_ATTRIBUTION_LABEL="powered by alvarocdev.com"
 NEXO_ATTRIBUTION_URL="https://alvarocdev.com"
@@ -133,7 +137,13 @@ rsync -avz public/build/ user@host:~/domains/alvarocdev.com/nexo-links/public/bu
 
 …or let the GitHub Actions workflow below handle it on every deploy.
 
-### Cron (optional, for future scheduled tasks)
+### Cron (NOT optional since 2026-08-02: it is how mail leaves)
+
+Every mail in this app is queued — a slow relay must not break a sign-up or a
+reset — and shared hosting cannot hold a worker process, so the scheduler drains
+the queue in short bursts (`routes/console.php`). Without this cron entry the app
+looks perfectly healthy and not one verification, reset or security notice ever
+goes out.
 
 hPanel → **Advanced → Cron Jobs**:
 

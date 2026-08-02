@@ -21,6 +21,56 @@ const PAGINATION_KEYS = ['next', 'previous'];
 // Nexo-specific strings (and tone overrides). Keys are the English source.
 const nexo = {
     es: {
+        'If it was not you, write to us now: whoever changed it can already receive everything we send about this account.':
+            'Si no fuiste tú, escríbenos ahora: quien lo cambió ya puede recibir todo lo que enviamos sobre esta cuenta.',
+        'Reason given':
+            'Motivo indicado',
+        'See the reports on my page':
+            'Ver las denuncias de mi página',
+        'Somebody reported :page. Nothing has changed on your page: we are telling you because you should hear it from us and not from an empty profile.':
+            'Alguien denunció :page. No cambió nada en tu página: te lo contamos nosotros para que no te enteres por un perfil vacío.',
+        'Someone reported your page.':
+            'Alguien denunció tu página.',
+        'The email of your account was changed':
+            'Cambió el correo de tu cuenta',
+        'Your account now uses :new. This message goes to :old, the address it used before.':
+            'Tu cuenta ahora usa :new. Este mensaje va a :old, la dirección que usaba antes.',
+        'Your page was reported':
+            'Denunciaron tu página',
+        'Change my password':
+            'Cambiar mi contraseña',
+        'Confirm your address to finish setting up your account.':
+            'Confirma tu dirección para terminar de configurar tu cuenta.',
+        'Confirm your address to finish setting up your account. It is also how you get back in if you forget your password.':
+            'Confirma tu dirección para terminar de configurar tu cuenta. Es también la forma de volver a entrar si olvidas tu contraseña.',
+        'From now on you can sign in here with your Nexo ID. Your password keeps working — nothing else changed.':
+            'Desde ahora puedes entrar aquí con tu Nexo ID. Tu contraseña sigue funcionando: no cambió nada más.',
+        'If it was not you, reset it right now — whoever did it is signed in:':
+            'Si no fuiste tú, restablécela ahora mismo: quien la cambió está dentro de tu cuenta.',
+        'If the button does not work, copy and paste this link:':
+            'Si el botón no funciona, copia y pega este link:',
+        'If you did not ask for this, you can ignore this email — your password stays the same.':
+            'Si no lo pediste, puedes ignorar este correo: tu contraseña sigue igual.',
+        'If you did not create an account, you can ignore this email.':
+            'Si no creaste una cuenta, puedes ignorar este correo.',
+        'If you did not do this, change your password and write to us: your email address was verified by the identity provider, so someone with access to it linked the account.':
+            'Si no fuiste tú, cambia tu contraseña y escríbenos: el proveedor de identidad verificó tu correo, así que alguien con acceso a él vinculó la cuenta.',
+        'Nexo ID was linked to your account':
+            'Se vinculó Nexo ID a tu cuenta',
+        'Reset your password':
+            'Restablece tu contraseña',
+        'The password of your account was just changed. If it was you, there is nothing to do.':
+            'La contraseña de tu cuenta acaba de cambiar. Si fuiste tú, no tienes que hacer nada.',
+        'Verify my email':
+            'Verificar mi correo',
+        'Verify your email':
+            'Verifica tu correo',
+        'You asked to reset your password.':
+            'Pediste restablecer tu contraseña.',
+        'You asked to reset your password. The link expires in :minutes minutes.':
+            'Pediste restablecer tu contraseña. El link vence en :minutes minutos.',
+        'Your password changed':
+            'Tu contraseña cambió',
         'An account with this email already exists. Verify your email on Nexo ID first.':
             'Ya existe una cuenta con este correo. Verifica tu correo en Nexo ID primero.',
         'Continue with Nexo ID': 'Continuar con Nexo ID',
@@ -261,6 +311,56 @@ const nexo = {
         'es · en · pt — light and dark': 'es · en · pt — claro y oscuro',
     },
     pt: {
+        'If it was not you, write to us now: whoever changed it can already receive everything we send about this account.':
+            'Se não foi você, nos escreva agora: quem mudou já pode receber tudo o que enviamos sobre esta conta.',
+        'Reason given':
+            'Motivo informado',
+        'See the reports on my page':
+            'Ver as denúncias da minha página',
+        'Somebody reported :page. Nothing has changed on your page: we are telling you because you should hear it from us and not from an empty profile.':
+            'Alguém denunciou :page. Nada mudou na sua página: contamos nós para você não descobrir por um perfil vazio.',
+        'Someone reported your page.':
+            'Alguém denunciou sua página.',
+        'The email of your account was changed':
+            'O e-mail da sua conta mudou',
+        'Your account now uses :new. This message goes to :old, the address it used before.':
+            'Sua conta agora usa :new. Esta mensagem vai para :old, o endereço que ela usava antes.',
+        'Your page was reported':
+            'Denunciaram sua página',
+        'Change my password':
+            'Trocar minha senha',
+        'Confirm your address to finish setting up your account.':
+            'Confirme seu endereço para terminar de configurar sua conta.',
+        'Confirm your address to finish setting up your account. It is also how you get back in if you forget your password.':
+            'Confirme seu endereço para terminar de configurar sua conta. É também como você volta a entrar se esquecer a senha.',
+        'From now on you can sign in here with your Nexo ID. Your password keeps working — nothing else changed.':
+            'A partir de agora você pode entrar aqui com seu Nexo ID. Sua senha continua funcionando: nada mais mudou.',
+        'If it was not you, reset it right now — whoever did it is signed in:':
+            'Se não foi você, redefina agora mesmo: quem mudou está dentro da sua conta.',
+        'If the button does not work, copy and paste this link:':
+            'Se o botão não funcionar, copie e cole este link:',
+        'If you did not ask for this, you can ignore this email — your password stays the same.':
+            'Se você não pediu, pode ignorar este e-mail: sua senha continua a mesma.',
+        'If you did not create an account, you can ignore this email.':
+            'Se você não criou uma conta, pode ignorar este e-mail.',
+        'If you did not do this, change your password and write to us: your email address was verified by the identity provider, so someone with access to it linked the account.':
+            'Se não foi você, troque sua senha e nos escreva: o provedor de identidade verificou seu e-mail, então alguém com acesso a ele vinculou a conta.',
+        'Nexo ID was linked to your account':
+            'O Nexo ID foi vinculado à sua conta',
+        'Reset your password':
+            'Redefina sua senha',
+        'The password of your account was just changed. If it was you, there is nothing to do.':
+            'A senha da sua conta acabou de mudar. Se foi você, não precisa fazer nada.',
+        'Verify my email':
+            'Verificar meu e-mail',
+        'Verify your email':
+            'Verifique seu e-mail',
+        'You asked to reset your password.':
+            'Você pediu para redefinir sua senha.',
+        'You asked to reset your password. The link expires in :minutes minutes.':
+            'Você pediu para redefinir sua senha. O link expira em :minutes minutos.',
+        'Your password changed':
+            'Sua senha mudou',
         'An account with this email already exists. Verify your email on Nexo ID first.':
             'Já existe uma conta com este e-mail. Verifique seu e-mail no Nexo ID primeiro.',
         'Continue with Nexo ID': 'Continuar com o Nexo ID',
