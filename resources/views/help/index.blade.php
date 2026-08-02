@@ -35,7 +35,7 @@
     <main id="main" class="flex-1">
         <div class="nexo-help">
             <h1>{{ __('nexo.help.title') }}</h1>
-            <p>{{ __('What can I do in :app?', ['app' => config('app.name')]) }}</p>
+            <p>{{ __('nexo.help.intro') }}</p>
 
             @foreach ($faqs as $faq)
                 <details class="nexo-help__item">
