@@ -2,6 +2,12 @@
      stylesheet; every full-page <head> pulls this partial in before @vite. --}}
 @include('partials.theme-init')
 
+{{-- @vite builds the woff2 files but never asks for them: the @font-face rules
+     only ship if Vite::fonts() emits them. Without this line the family face is
+     published and nobody requests it, and every page falls back to the system
+     stack. It goes before @vite so the face is known when the CSS lands. --}}
+{{ Vite::fonts() }}
+
 <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="32x32">
 <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">

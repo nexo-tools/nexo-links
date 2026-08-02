@@ -16,8 +16,11 @@ export default {
 
     theme: {
         extend: {
+            // Instrument Sans first, the system stack behind it: the family face
+            // is the one the ecosystem shares, and the fallback is what renders
+            // while the woff2 is still in flight.
             fontFamily: {
-                sans: [...defaultTheme.fontFamily.sans],
+                sans: ['Instrument Sans', ...defaultTheme.fontFamily.sans],
             },
 
             // Nexo brand + semantic colors → nexo-tokens.css variables. Additive:
